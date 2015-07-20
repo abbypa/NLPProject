@@ -6,49 +6,69 @@ def i_feel_lucky(term):
     return duckduckgo.get_zci(term)
 
 
-def add_category_if_exists(item, category, subcategory):
-    sub_item = getattr(item, category, None)
-    if sub_item is not None:
-        text = getattr(sub_item, subcategory, None)
-        if text is not None and text != '':
-            return category + ': ' + text + '\n'
-    return ''
-
-
-def add_result_if_exists(item, deep=True):
-    result_str = ''
-    text = getattr(item, 'text', None)
-    url = getattr(item, 'url', None)
-    if text is not None and url is not None:
-        result_str += text + ": " + url
-    topics = getattr(item, 'topics', None)
-    if topics is not None:
-        for topic in topics:
-            result_str += add_result_if_exists(topic, False) #no endless recursion!
-    return result_str
-
-
 def general_search(term):
     r = duckduckgo.query(term)
     all_results = ''
-    all_results += add_category_if_exists(r, 'abstract', 'text')
-    all_results += add_category_if_exists(r, 'definition', 'text')
-    all_results += add_category_if_exists(r, 'answer', 'text')
-    all_results += add_category_if_exists(r, 'redirect', 'url')
 
-    all_results += 'Results: \n'
-    for result in r.results:
-        all_results += add_result_if_exists(result)
-    all_results += 'Related: \n'
-    for related in r.related:
-        all_results += add_result_if_exists(related)
+    all_results += try_add_category(r, 'abstract', 'text')
+    all_results += try_add_category(r, 'definition', 'text')
+    all_results += try_add_category(r, 'answer', 'text')
+    all_results += try_add_category(r, 'redirect', 'text')
+
+    all_results += try_add_results(r, "results")
+    all_results += try_add_results(r, "related")
+
     return all_results
 
 
+def try_add_category(item, category, subcategory):
+    try:
+        text = getattr(getattr(item, category, None), subcategory, None)
+        if text is not None and text != '':
+            return category + ': ' + text + '\n'
+        return ''
+    except: #one category not existing should not fail the others
+        pass
+
+
+def try_add_results(r, category):
+    result_str = ''
+    results = getattr(r, category, None)
+    if results is not None and len(results) > 0:
+        result_str += category + ': \n'
+        for result in results:
+            result_str += try_add_text_and_url(result)
+            result_str += try_add_topics(result)
+    return result_str
+
+
+def try_add_text_and_url(item):
+    try:
+        text = item.text
+        url = item.url
+        if (text is not None and text != '') or (url is not None and url != ''):
+            return text + ": " + url + '\n'
+    except:
+        return ''
+
+
+def try_add_topics(item):
+    result_str = ''
+    topics = getattr(item, 'topics', None)
+    if topics is not None and len(topics) > 0:
+        result_str += 'topics: \n'
+        for topic in item.topics:
+            try:
+                result_str += try_add_text_and_url(topic)
+            except:
+                pass
+    return result_str
+
+
 def __main__(argv):
-    term = 'Eiffel'
+    term = 'Microsoft'
     print general_search(term)
-    print '\n'
+    print("I Feel Lucky:")
     print i_feel_lucky(term)
     return 1
 
