@@ -2,6 +2,10 @@ import duckduckgo
 import sys
 
 
+def total_search(term):
+    return i_feel_lucky(term) + '\n\n' + general_search(term)
+
+
 def i_feel_lucky(term):
     return duckduckgo.get_zci(term)
 
@@ -63,15 +67,3 @@ def try_add_topics(item):
             except:
                 pass
     return result_str
-
-
-def __main__(argv):
-    term = 'Microsoft'
-    print general_search(term)
-    print("I Feel Lucky:")
-    print i_feel_lucky(term)
-    return 1
-
-
-if __name__ == "__main__":
-    __main__(sys.argv[1:])
