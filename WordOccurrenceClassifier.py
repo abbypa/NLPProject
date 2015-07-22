@@ -3,7 +3,7 @@ import sys
 
 category_to_keywords = dict([
     ('person', ['he', 'she', 'born', 'age', 'person', 'people']),
-    ('company', ['corp', 'corp.', 'company', 'inc', 'inc.', 'founded']),
+    ('company', ['corp', 'corporation', 'company', 'inc', 'founded']),
     ('place', ['located', 'place', 'city'])
 ])
 categories = category_to_keywords.keys()
