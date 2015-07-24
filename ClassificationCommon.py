@@ -1,13 +1,13 @@
+categories = ['person', 'company', 'place']
+
+
 class ClassificationResult:
     Term = "",
     Matches = dict()
 
-    def __init__(self, term):
+    def __init__(self, term, matches=None):
         self.Term = term
-        self.Matches = {key: 0 for key in categories}
-
-    def __init__(self, term, matches):
-        self.Term = term
-        self.Matches = matches
-
-categories = ['person', 'company', 'place']
+        if matches is None:
+            self.Matches = {key: 0 for key in categories}
+        else:
+            self.Matches = matches
