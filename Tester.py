@@ -3,7 +3,7 @@ from WordOccurrenceClassifier import *
 
 
 def __main__(argv):
-    terms = ['Barack Obama', 'Lady Gaga', 'Microsoft', 'Apple', 'San Francisco', 'Grand Canyon']
+    terms = ['Barack Obama', 'Lady Gaga', 'Microsoft', 'Apple', 'San Francisco', 'Grand Canyon', 'Book', 'Cup', 'Ground', 'Piece', 'Ball', 'Tony']
     for term in terms:
         search_result = general_search(term)
         result = calculate_score(term, search_result)
