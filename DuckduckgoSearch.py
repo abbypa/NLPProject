@@ -1,6 +1,8 @@
 import duckduckgo
-import sys
+import re
 
+url_regex = 'https://duckduckgo.com(/.+)*/(.+)'
+url_compiled_regex = re.compile(url_regex)
 
 def total_search(term):
     return i_feel_lucky(term) + '\n\n' + general_search(term)
@@ -46,12 +48,20 @@ def try_add_results(r, category):
     return result_str
 
 
+def strip_url(url):
+    try:
+        stripped_url = url_compiled_regex.match(url).group(2)
+    except:
+        stripped_url = url
+    return stripped_url.replace('?kp=1', '')
+
+
 def try_add_text_and_url(item):
     try:
         text = item.text
         url = item.url
         if (text is not None and text != '') or (url is not None and url != ''):
-            return text + ": " + url + '\n'
+            return text + ": " + strip_url(url) + '\n'
     except:
         return ''
 

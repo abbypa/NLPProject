@@ -17,9 +17,22 @@ class UpperCaseClassifier:
         return ClassificationResult(term, {key: 1.0/len(categories) for key in categories})
 
 
+class CompanyDuckDuckClassifier:
+    company_postfix = ['corp', 'corporation', 'company', 'inc', 'headquarters']
+
+    def classify(self, term):
+        result = ClassificationResult(term)
+        for company_word in self.company_postfix:
+            term_to_search = term + ' ' + company_word
+            if general_search(term_to_search) != '':
+                result.Matches['company'] += 1
+        return result
+
+
 weighted_classifiers = [
-    [DuckDuckGoWordOccurrenceClassifier(), 0.5],
-    [UpperCaseClassifier(), 0.5]
+    #[DuckDuckGoWordOccurrenceClassifier(), 1],
+    #[UpperCaseClassifier(), 0.5]
+    [CompanyDuckDuckClassifier(), 1]
 ]
 
 
