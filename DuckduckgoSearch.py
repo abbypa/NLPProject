@@ -1,79 +1,78 @@
 import duckduckgo
 import re
 
-url_regex = 'https://duckduckgo.com(/.+)*/(.+)'
-url_compiled_regex = re.compile(url_regex)
 
-def total_search(term):
-    return i_feel_lucky(term) + '\n\n' + general_search(term)
+class DuckduckgoSearch:
+    def __init__(self, verbosity=False):
+        self.url_regex = 'https://duckduckgo.com(/.+)*/(.+)'
+        self.url_compiled_regex = re.compile(self.url_regex)
+        self.verbosity = verbosity
 
+    def total_search(self, term):
+        return self.i_feel_lucky(term) + '\n\n' + self.general_search(term)
 
-def i_feel_lucky(term):
-    return duckduckgo.get_zci(term)
+    @staticmethod
+    def i_feel_lucky(term):
+        return duckduckgo.get_zci(term)
 
+    def general_search(self, term):
+        r = duckduckgo.query(term)
+        all_results = ''
+        all_results += self.try_add_category(r, 'abstract', 'text')
+        all_results += self.try_add_category(r, 'definition', 'text')
+        all_results += self.try_add_category(r, 'answer', 'text')
+        all_results += self.try_add_category(r, 'redirect', 'text')
+        all_results += self.try_add_results(r, "results")
+        all_results += self.try_add_results(r, "related")
+        return all_results
 
-def general_search(term):
-    r = duckduckgo.query(term)
-    all_results = ''
+    def try_add_category(self, item, category, subcategory):
+        try:
+            text = getattr(getattr(item, category, None), subcategory, None)
+            if text is not None and text != '':
+                if self.verbosity:
+                    return category + ': ' + text + '\n'
+                return text + '\n'
+            return ''
+        except:  # one category not existing should not fail the others
+            pass
 
-    all_results += try_add_category(r, 'abstract', 'text')
-    all_results += try_add_category(r, 'definition', 'text')
-    all_results += try_add_category(r, 'answer', 'text')
-    all_results += try_add_category(r, 'redirect', 'text')
+    def try_add_results(self, r, category):
+        result_str = ''
+        results = getattr(r, category, None)
+        if results is not None and len(results) > 0:
+            if self.verbosity:
+                result_str += category + ': \n'
+            for result in results:
+                result_str += self.try_add_text_and_url(result)
+                result_str += self.try_add_topics(result)
+        return result_str
 
-    all_results += try_add_results(r, "results")
-    all_results += try_add_results(r, "related")
+    def strip_url(self, url):
+        try:
+            stripped_url = self.url_compiled_regex.match(url).group(2)
+        except:
+            stripped_url = url
+        return stripped_url.replace('?kp=1', '')
 
-    return all_results
+    def try_add_text_and_url(self, item):
+        try:
+            text = item.text
+            url = item.url
+            if (text is not None and text != '') or (url is not None and url != ''):
+                return text + ": " + self.strip_url(url) + '\n'
+        except:
+            return ''
 
-
-def try_add_category(item, category, subcategory):
-    try:
-        text = getattr(getattr(item, category, None), subcategory, None)
-        if text is not None and text != '':
-            return category + ': ' + text + '\n'
-        return ''
-    except: #one category not existing should not fail the others
-        pass
-
-
-def try_add_results(r, category):
-    result_str = ''
-    results = getattr(r, category, None)
-    if results is not None and len(results) > 0:
-        result_str += category + ': \n'
-        for result in results:
-            result_str += try_add_text_and_url(result)
-            result_str += try_add_topics(result)
-    return result_str
-
-
-def strip_url(url):
-    try:
-        stripped_url = url_compiled_regex.match(url).group(2)
-    except:
-        stripped_url = url
-    return stripped_url.replace('?kp=1', '')
-
-
-def try_add_text_and_url(item):
-    try:
-        text = item.text
-        url = item.url
-        if (text is not None and text != '') or (url is not None and url != ''):
-            return text + ": " + strip_url(url) + '\n'
-    except:
-        return ''
-
-
-def try_add_topics(item):
-    result_str = ''
-    topics = getattr(item, 'topics', None)
-    if topics is not None and len(topics) > 0:
-        result_str += 'topics: \n'
-        for topic in item.topics:
-            try:
-                result_str += try_add_text_and_url(topic)
-            except:
-                pass
-    return result_str
+    def try_add_topics(self, item):
+        result_str = ''
+        topics = getattr(item, 'topics', None)
+        if topics is not None and len(topics) > 0:
+            if self.verbosity:
+                result_str += 'topics: \n'
+            for topic in item.topics:
+                try:
+                    result_str += self.try_add_text_and_url(topic)
+                except:
+                    pass
+        return result_str
