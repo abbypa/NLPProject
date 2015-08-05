@@ -1,13 +1,10 @@
-### FIX - U.S
-
-
 import sys
 import re
 import codecs
 
 char_encode = {"eng1": "utf-8" , "eng2" : "cp1252"}
 punctuation = {",", ":", ";", "\"", r"'", "/", r"\\", "\?", "!", "\(", "\)", "\[", "\]", "\{", "\}", "<" , ">", "-" ,"_"}
-punctuation_not_for_regex = {",", ":", ";", "\"", "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">", "-" ,"_"}
+punctuation_not_for_regex = {",", ":", ";", "\"", "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">", "-" ,"_", ".\r\n"}
 stop_words = {"s","a","able","about","across","after","all","almost","also","am","among","an","and","any","are","as","at","be","because","been","but","by","can","cannot","could","dear","did","do","does","either","else","ever","every","for","from","get","got","had","has","have","he","her","hers","him","his","how","however","i","if","in","into","is","it","its","just","least","let","like","likely","may","me","might","most","must","my","neither","no","nor","not","of","off","often","on","only","or","other","our","own","rather","said","say","says","she","should","since","so","some","than","that","the","their","them","then","there","these","they","this","tis","to","too","twas","us","wants","was","we","were","what","when","where","which","while","who","whom","why","will","with","would","yet","you","your"}
 
 
@@ -64,18 +61,32 @@ def process_corpus(lang, ngram, corpus):
             tmp = line[i:i+ngram]
             tmp = strip_punc(tmp)
             tmp = remove_first_sw(tmp)
-            #if len(tmp) > 1:
-                #consider increasing window
+            if len(tmp) > 1:
+                if tmp[-1] in stop_words:
+                    tmp = increase_phrase(i,line,tmp)
             if len(tmp)==0 or tmp[0]=='':
                 continue
             else:
                print(i,tmp)
     inputf.close()
                 
+
+def increase_phrase(idx, line, seq):
+    while True:
+        if (idx+len(seq)) >= len(line):
+            break
+        if line[idx+len(seq)] in punctuation_not_for_regex:
+            break
+        elif line[idx+len(seq)] in stop_words:
+            seq.append(line[idx+len(seq)])
+        else:
+            seq.append(line[idx+len(seq)])
+            break
+    return seq
     
 def remove_first_sw(seq):
     if len(seq) > 0:
-        if seq[0].lower() in stop_words:
+        if seq[0].lower() in stop_words or len(seq[0])==1:
             return ['']
     return seq
     
