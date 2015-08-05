@@ -1,0 +1,30 @@
+Info:)
+- Works with python 2.7
+- Not ful search but answer-giver- gives a summary, definition, related meanings, image
+
+Instll:
+1. download from here:
+    https://pypi.python.org/pypi/duckduckgo2
+2. run (with python2.7): python setup.py install
+3. if there is an error: "No module named setuptools", fix as explained here: http://stackoverflow.com/questions/3652625/installing-setuptools-on-64-bit-windows/12793230#12793230
+    3.1 download ez_setup.py (http://peak.telecommunity.com/dist/ez_setup.py)
+    3.2 place it in C:\Python27\Scripts
+    3.3 run: python ez_setup.py
+    3.4 Run step 2 again
+    
+Usage:
+- See here: https://pypi.python.org/pypi/duckduckgo2
+-   >>> import duckduckgo
+    >>> r = duckduckgo.query('Barack Obama')
+- Interesting fields-
+    - abstract.text - short passage (search for "born"?)
+    - self.results (url, text like "Official Site", topics(?))
+    - related.text- other related items. Useful for disambiguation type (Apple, Apple Inc.)
+    - definition.text (always empty)
+    - answer.text
+    - image.url
+    - type- Name (?)
+- Overall search-
+    >>> print duckduckgo.get_zci('Barack Obama')
+    >>> print duckduckgo.get_zci('Barack Obama Facebook')
+    
