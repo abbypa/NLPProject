@@ -6,5 +6,6 @@
 - add sleep between searches
 - more classifers- save words before hits, dictionary
 - tokenizer optimizations ('-)
-- stam
 - optional- add metadata
+
+balagan
