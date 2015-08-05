@@ -7,3 +7,5 @@
 - more classifers- save words before hits, dictionary
 - tokenizer optimizations ('-)
 - optional- add metadata
+
+balagan
