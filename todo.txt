@@ -1,0 +1,9 @@
+- add grade for "normal word" (duckduck go- ambiguous)
+- normalize each classifier (maybe using "normal word")
+- connect classifier to tokenizer (+ try to enlarge window)
+- connect facbook to classifers
+- format output
+- add sleep between searches
+- more classifers- save words before hits, dictionary
+- tokenizer optimizations ('-)
+- optional- add metadata
