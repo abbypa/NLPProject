@@ -1,10 +1,10 @@
 from ClassificationCommon import *
 from WordOccurrenceClassifier import *
 from DuckduckgoSearch import *
+from FacebookSearch import *
 
 
 class DuckDuckGoWordOccurrenceClassifier:
-
     def __init__(self):
         self.duckduckgo_search = DuckduckgoSearch(False)
         self.word_occurrence_classifier = WordOccurrenceClassifier(3)
@@ -24,7 +24,6 @@ class UpperCaseClassifier:
 
 
 class CompanyDuckDuckClassifier:
-
     def __init__(self):
         self.duckduckgo_search = DuckduckgoSearch(True)
         self.company_postfix = ['corp', 'corporation', 'company', 'inc', 'headquarters']
@@ -38,10 +37,22 @@ class CompanyDuckDuckClassifier:
         return result
 
 
+class FacebookClassifier:
+    def __init__(self):
+        self.facebook_search = FacebookSearch()
+
+    def classify(self, term):
+        cnt = self.facebook_search.search_Facebook(term)
+        matches = dict()
+        for i in range(3):
+            matches[categories[i]] = cnt[i]
+        return ClassificationResult(term, matches)
+
 weighted_classifiers = [
-    [DuckDuckGoWordOccurrenceClassifier(), 1],
+    # [DuckDuckGoWordOccurrenceClassifier(), 1],
     # [UpperCaseClassifier(), 0.5]
     # [CompanyDuckDuckClassifier(), 1]
+    [FacebookClassifier(), 1]
 ]
 
 
