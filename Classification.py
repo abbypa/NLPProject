@@ -2,6 +2,7 @@ from ClassificationCommon import *
 from WordOccurrenceClassifier import *
 from DuckduckgoSearch import *
 from FacebookSearch import *
+from DictionarySearch import *
 
 
 class DuckDuckGoWordOccurrenceClassifier:
@@ -44,15 +45,28 @@ class FacebookClassifier:
     def classify(self, term):
         cnt = self.facebook_search.search_Facebook(term)
         matches = dict()
-        for i in range(3):
+        for i in range(len(categories)):
             matches[categories[i]] = cnt[i]
         return ClassificationResult(term, matches)
+
+class DictionaryClassifier:
+    def __init__(self):
+        self.dictionary_search = DictionarySearch()
+
+    def classify(self, term):
+        cnt = self.dictionary_search.search_dictionary(term)
+        matches = dict()
+        for i in range(len(categories)):
+            matches[categories[i]] = cnt[i]
+        return ClassificationResult(term, matches)
+
 
 weighted_classifiers = [
     # [DuckDuckGoWordOccurrenceClassifier(), 1],
     # [UpperCaseClassifier(), 0.5]
     # [CompanyDuckDuckClassifier(), 1]
-    [FacebookClassifier(), 1]
+    # [FacebookClassifier(), 1],
+     [DictionaryClassifier(), 1]
 ]
 
 

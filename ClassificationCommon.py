@@ -1,4 +1,4 @@
-categories = ['person', 'company', 'place']
+categories = ['person', 'company', 'place', 'regular']
 
 
 class ClassificationResult:

@@ -1,9 +1,8 @@
-- add grade for "normal word" (duckduck go- ambiguous)
+- update duckduckgo to grade "regular" word
 - normalize each classifier (maybe using "normal word")
 - connect classifier to tokenizer (+ try to enlarge window)
-- format output
-- add sleep between searches
-- more classifers- save words before hits, dictionary
+- init all classifiers in main (not everytime we search)
+- add sleep between searches (currently 1 second beforeprocessing a new line maybe it should be done more often?)
+- more classifers- save words before hits
 - tokenizer optimizations ('-)
-- optional- add metadata
 - installation script

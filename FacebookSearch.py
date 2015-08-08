@@ -9,48 +9,52 @@ class FacebookSearch:
 
     def __init__(self):
         ##https://developers.facebook.com/tools/explorer/
-        user_access_token = "CAACEdEose0cBAOzUbqHZB8aZAY4PqDWHCAjhpqBl2bVn3hliZA12SRk0YHhd3ZBIrU9voOM17SYQaEnBTDdZB4RuVGxxG9oAlIZASKMEaA2pZCZBwIVd47tNxdQkS6PnzRbtcKGAHMzb3EfxkSq2i1hSyhOF3loZBIkMJxKZC19SGNyEZC7NAC7PJdWYWOFLvFxJnAMv2cFtUbVfl1fc7j4IykX"
+        user_access_token = "CAACEdEose0cBAKuDtgOAeIjs5meUktdZAyvKq1JO89Od5ad2hU0ibZBIscDGQGZAcksIJuKDswwK8OY9suXj3HuSYZBc02cfRZAZCZBoFwNiiIZAzhixZCTh0S753r8qh9yx2hm2g2BVbEFt9LkoVnl3vwkktgFNEGueFtZA1CKDR76mqZAVk8ll8Vqiz5eEN0lpvZALsgVgpVFEMdeZA3akSozVX"
         self.graph = GraphAPI(user_access_token)
 
     def search_Facebook(self, term):
-        cnt = [0, 0, 0]
-        cnt = self.search_name(term, cnt)
-        cnt = self.search_company(term, cnt)
+        cnt = [0, 0, 0, 0]
+        cnt = self.search_user(term, cnt)
+        cnt = self.search_page(term, cnt)
         cnt = self.search_place(term, cnt)
+        if sum(cnt) < 15:
+            cnt = [0, 0, 0, 10]
         return cnt
 
-    def search_name(self, term, cnt):
+    def search_user(self, term, cnt):
         res = self.get_results(term, "user")
         for i in res["data"]:
-            # print i
-            # if (check_name(i,term)):
-            # print graph.get(i["id"] +"?fields=relationship_status")
-            cnt[0] += self.check_name(i, term)
+            #print i
+            #if (self.check_name(i,term,1)):
+            #    print self.graph.get(i["id"])
+            cnt[0] += self.check_name(i, term, 0.1)
         return cnt
 
-    def search_company(self, term, cnt):
+    def search_page(self, term, cnt):
         res = self.get_results(term, "page")
         for i in res["data"]:
-            # print i
-            if i["category"].lower() in self.company:  # use same words as duckduckgo?
-                cnt[1] += self.check_name(i, term)
+            #print i
+            if i["category"].lower() in self.company:
+                cnt[1] += self.check_name(i, term, 1)
             elif i["category"].lower() in self.person:
-                cnt[0] += self.check_name(i, term)
+                cnt[0] += self.check_name(i, term, 1)
         return cnt
 
     def search_place(self, term, cnt):
         res = self.get_results(term, "place")
         for i in res["data"]:
             # print i
-            if i["category"].lower() in self.place:  # use same words as duckduckgo?
-                cnt[2] += self.check_name(i, term)
+            if i["category"].lower() in self.place:  
+                cnt[2] += self.check_name(i, term, 2)
             for idx in range(len(i["category_list"])):
                 if i["category_list"][idx]["name"].lower() in self.place:
-                    cnt[2] += self.check_name(i, term)
+                    cnt[2] += self.check_name(i, term, 2)
         return cnt
 
     @staticmethod
-    def check_name(res, term):
+    def check_name(res, term, mul):
+        if term.lower()== res["name"].lower():
+            return 10 * mul
         if len(term.split(" ")) == 1:
             tmp = res["name"].split(" ")
             for x in tmp:
