@@ -6,18 +6,20 @@ class WordOccurrenceClassifier:
 
     def __init__(self):
         self.category_to_keywords = dict([
-            ('person', ['he', 'she', 'born', 'age', 'person', 'people', 'his', 'her',
+            ('person', ['he', 'she', 'born', 'age', 'person', 'people', 'his', 'her', 'raised',
+                        'man', 'men', 'woman', 'women', 'male', 'female',
                         'politician', 'artist', 'writer', 'athlete', 'musician', 'entertainer',
                         'actor', 'director', 'author', 'comedian',
                         'husband', 'wife', 'son', 'daughter', 'brother', 'sister']),
-            ('company', ['corp', 'corporation', 'company', 'companies', 'inc',
+            ('company', ['corp', 'corporation', 'company', 'companies', 'inc', 'conglomerate',
                          'founded', 'headquarters', 'headquartered', 'business', 'product', 'products']),
             ('place', ['located', 'place', 'places', 'city', 'cities', 'country', 'countries',
-                       'area', 'areas', 'region', 'regions', 'landmark', 'landmarks', 'travel', 'park', 'parks'])
+                       'area', 'areas', 'region', 'regions', 'landmark', 'landmarks', 'travel', 'park', 'parks',
+                       'population', 'populated', 'district', 'districts'])
         ])
         self.categories = self.category_to_keywords.keys()
         self.delimiters = '[ _(),/.:\n]'
-        self.min_hits_to_match = 5
+        self.min_hits_to_match = 9
 
     def calculate_score(self, term, data):
         hits = {key: 0 for key in categories}
