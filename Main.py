@@ -7,7 +7,7 @@ DICTIONARY_PATH = r"C:\Users\Nini\Desktop\limudim\nlproj\git\Additional\dictiona
 
 def __main__(argv):
 
-    process_corpus("eng1",1,r"C:\Users\Nini\Desktop\limudim\nlproj\git\Additional\tiny_corpus.txt")
+    process_corpus("eng1",1,argv[0])
 
     return 1
 
