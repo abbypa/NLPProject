@@ -17,6 +17,6 @@ class OutputFormat:
             return self.word
         return self.word + "/" + self.tag_translation[self.tag]
 
-
-    def update_tag(self,tag):
-        self.tag = tag
+    def update_tag(self, tag):
+        if self.tag == "regular":
+            self.tag = tag

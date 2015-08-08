@@ -8,7 +8,7 @@ from DictionarySearch import *
 class DuckDuckGoWordOccurrenceClassifier:
     def __init__(self):
         self.duckduckgo_search = DuckduckgoSearch(False)
-        self.word_occurrence_classifier = WordOccurrenceClassifier(3)
+        self.word_occurrence_classifier = WordOccurrenceClassifier()
 
     def classify(self, term):
         search_result = self.duckduckgo_search.general_search(term)
@@ -62,11 +62,11 @@ class DictionaryClassifier:
 
 
 weighted_classifiers = [
-    # [DuckDuckGoWordOccurrenceClassifier(), 1],
+    [DuckDuckGoWordOccurrenceClassifier(), 1],
     # [UpperCaseClassifier(), 0.5]
     # [CompanyDuckDuckClassifier(), 1]
     # [FacebookClassifier(), 1],
-     [DictionaryClassifier(), 1]
+    # [DictionaryClassifier(), 1]
 ]
 
 
