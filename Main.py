@@ -1,10 +1,5 @@
 import sys
-from Process import *
-from Classification import *
-from WordOccurrenceClassifier import *
-from DuckduckgoSearch import *
-from FacebookSearch import *
-from DictionarySearch import *
+from ProcessCorpus import *
 
 DICTIONARY_PATH = r"C:\Users\Nini\Desktop\limudim\nlproj\git\Additional\dictionary.txt"
 
