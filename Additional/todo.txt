@@ -5,3 +5,5 @@
 - tokenizer optimizations ('-)
 - installation script
 - search cache?
+- 'business' in facebook classifier (category)
+- consider- selecting NE if some categories are "close enough" (not just all equal)

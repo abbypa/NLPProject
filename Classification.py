@@ -16,12 +16,17 @@ class DuckDuckGoWordOccurrenceClassifier:
 
 
 class UpperCaseClassifier:
+    def __init__(self):
+        self.normalized_score = 10
+
     def classify(self, term):
         term_words = term.split()
+        result = ClassificationResult(term)
         if any(word[0].islower() for word in term_words):
-            return ClassificationResult(term)
-        # else - all words start with a capital letter
-        return ClassificationResult(term, {key: 1.0/len(categories) for key in categories})
+            result.Matches['regular'] = self.normalized_score
+        else: # all words start with a capital letter
+            result.Matches['person'] = result.Matches['company'] = result.Matches['place'] = self.normalized_score
+        return result
 
 
 class CompanyDuckDuckClassifier:
@@ -63,8 +68,8 @@ class DictionaryClassifier:
 
 weighted_classifiers = [
     [DuckDuckGoWordOccurrenceClassifier(), 1],
-    # [UpperCaseClassifier(), 0.5]
-    # [CompanyDuckDuckClassifier(), 1]
+    # [UpperCaseClassifier(), 1],
+    # [CompanyDuckDuckClassifier(), 1],
     # [FacebookClassifier(), 1],
     # [DictionaryClassifier(), 1]
 ]
