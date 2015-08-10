@@ -23,7 +23,7 @@ def process_corpus(lang, ngram, corpus):
         time.sleep(1)
         line = l.split(" ")
         result = copy_line(line)
-        for i in range(len(line) - ngram):
+        for i in range(len(line) - ngram + 1):
             if result[i].get_tag() == "regular":
                 term = line[i:i + ngram]
                 term = fix_term(line, i, term)

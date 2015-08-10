@@ -5,3 +5,4 @@
 - tokenizer optimizations ('-)
 - installation script
 - consider- selecting NE if some categories are "close enough" (not just all equal)
+- after more runs (to find bugs)- surround all api calls with try-except and return an empty result
