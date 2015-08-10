@@ -11,14 +11,17 @@ class Cache:
         self.cache = dict()
 
     def load(self):
-        cache_file = codecs.open(self.cache_path, "r", encoding=char_encode[self.lang])
-        for l in cache_file:
-            tmp = l.split(",")
-            matches = dict()
-            for i in range(len(categories)):
-                matches[categories[i]] = tmp[i+1]
-            self.cache[tmp[0]] = ClassificationResult(tmp[0], matches)
-        cache_file.close()
+        try:
+            cache_file = codecs.open(self.cache_path, "r", encoding=char_encode[self.lang])
+            for l in cache_file:
+                tmp = l.split(",")
+                matches = dict()
+                for i in range(len(categories)):
+                    matches[categories[i]] = int(tmp[i+1])
+                self.cache[tmp[0]] = ClassificationResult(tmp[0], matches)
+            cache_file.close()
+        except:  # cache corrupted- continue without
+            pass
 
     def save(self):
         cache_file = codecs.open(self.cache_path, "w", encoding=char_encode[self.lang])
@@ -39,8 +42,8 @@ class Cache:
         else:
             return None
 
-    def update_cache(self,term,matches):
-        self.cache[term] = matches
+    def update_cache(self,term,classification_result):
+        self.cache[term] = classification_result
 
     def update_cache_from_list(self,term,cnt):
         matches = dict()

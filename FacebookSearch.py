@@ -20,14 +20,15 @@ class FacebookSearch:
         self.fb_cache.save()
 
     def search_Facebook(self, term):
-        if self.fb_cache.search_cache(term) == None:
+        cache_result = self.fb_cache.search_cache(term)
+        if cache_result is None:
             cnt = [0, 0, 0, 0]
             cnt = self.search_user(term, cnt)
             cnt = self.search_page(term, cnt)
             cnt = self.search_place(term, cnt)
             self.fb_cache.update_cache_from_list(term,cnt)
         else:
-            m = self.fb_cache.search_cache(term).Matches
+            m = cache_result.Matches
             cnt = [m["person"],m["company"],m["place"],m["regular"]]
             for i in range(len(cnt)):
                 cnt[i] = float(cnt[i])
