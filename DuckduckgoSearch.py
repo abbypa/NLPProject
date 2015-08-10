@@ -59,8 +59,9 @@ class DuckduckgoSearch:
         try:
             text = item.text
             url = item.url
-            if (text is not None and text != '') or (url is not None and url != ''):
+            if (text is not None and text != '') and (url is not None and url != ''):
                 return text + ": " + self.strip_url(url) + '\n'
+            return ''
         except:
             return ''
 
