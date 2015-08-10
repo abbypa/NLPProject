@@ -14,6 +14,8 @@ stop_words = {"s", "a", "able", "about", "across", "after", "all", "almost", "al
               "this", "tis", "to", "too", "twas", "us", "wants", "was", "we", "were", "what", "when", "where", "which",
               "while", "who", "whom", "why", "will", "with", "would", "yet", "you", "your"}
 
+MAX_GRADE_FOR_REGULAR = 0
+WINNER_PERCENT = 0.9
 
 def process_corpus(lang, ngram, corpus):
     classifier = Classifier()
@@ -36,16 +38,18 @@ def process_corpus(lang, ngram, corpus):
 
 
 def get_winner(grades):
-    maxval = max(grades.values())
-    if maxval > 0:
-        if grades.values().count(maxval) == 1:
-            for x in grades.keys():
-                if grades[x] == maxval:
-                    return x
-        else:
-            return "ne"
-    else:
-        return "regular"
+    max_val = max(grades.values())
+    if max_val <= MAX_GRADE_FOR_REGULAR:
+        return 'regular'
+    winner = ''
+    winner_min_grade = max_val * WINNER_PERCENT
+    for key, value in grades.items():
+        if value >= winner_min_grade:
+            if winner == '':
+                winner = key
+            else:  # more than one suitable
+                return 'ne'
+    return winner
 
 
 def test_term(output, line, index, term, direction, classifier):
