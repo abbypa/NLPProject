@@ -15,16 +15,11 @@ def process_corpus(lang, ngram, corpus):
         line = l.split(" ")
         result = copy_line(line)
         for i in range(len(line)-ngram):
-            term = line[i:i+ngram]
-            term = strip_punc(term)
-            term = remove_first_sw(term)
-            if len(term) > 1:
-                if term[-1] in stop_words:
-                    term = increase_phrase(i,line,term)
-            if len(term)!=0 and term[0]!='':
-                grades = classify(" ".join(term)).Matches
-                new_tag = get_winner(grades)
-                update_output(result,i,term,new_tag)
+            if result[i].get_tag() == "regular":
+                term = line[i:i+ngram]
+                term = fix_term(line,i,term)
+                if len(term)!=0 and term[0]!='':
+                     result = test_term(result,line,i,term,"backward")
         print_result(outputf,result)
     inputf.close()
     outputf.close()
@@ -41,13 +36,48 @@ def get_winner(grades):
     else:
         return "regular"
 
+def test_term(output,line,index,term, direction):
+    #print term
+    grades = classify(" ".join(term)).Matches
+    new_tag = get_winner(grades)
+    if new_tag != "regular":
+        update_output(output,index,term,new_tag)
+        test_larger_window(output, line, index, term, direction)
+    return output
+    
+def fix_term(line,index,term):
+    term = strip_punc(term)
+    term = remove_first_sw(term)
+    if len(term) > 1:
+        if term[-1] in stop_words:
+            term = increase_phrase(index,line,term)
+    return term
+
+
+
+def test_larger_window(output, line, index, term, direction):
+    if direction != "forward":
+        if (index-1) >= 0 and line[index-1] not in punctuation_not_for_regex and line[index-1] not in stop_words:
+            new_term = line[index-1:index + len(term)]
+            return test_term(output,line,index-1,new_term, "backward")
+        return test_larger_window(output, line, index, term,"forward")
+    else:
+        if (index + len(term) + 1) < len(line):
+            new_term = line[index:index + len(term) + 1]
+            new_term = fix_term(line,index,new_term)
+            if new_term == term:
+                return output
+            return test_term(output,line,index,new_term, "forward")
+    return output
+
+
 def print_result(outputfile,result):
     for i in range(len(result)):
         outputfile.write(result[i].get_output() + " ")
 
-def update_output(output,i,term,tag):
+def update_output(output,index,term,tag):
     for x in range(len(term)):
-        output[i+x].update_tag(tag)
+        output[index+x].update_tag(tag)
     return output
 
 def copy_line(line):

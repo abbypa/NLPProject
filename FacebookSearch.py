@@ -1,32 +1,46 @@
 from facepy import GraphAPI
+from Cache import *
+from Main import FACEBOOK_CACHE
 
 class FacebookSearch:
-    company = {"company", "buisness", "computers/technology", "professional services", "product/service"}
+    company = {"company", "non-profit organization","organization", "professional services", "product/service", "government organization", "church/religious organization"}
     place = {"country", "city", "landmark", "public places", "historical place", "tours/sightseeing", "travel/leisure",
-             "national park"}
+             "national park", "neighborhood"}
     person = {"politician", "public figure", "government official", "writer", "athlete", "artist", "musician/band",
               "news personality", "entertainer", "actor/director", "author", "comedian"}
 
     def __init__(self):
         ##https://developers.facebook.com/tools/explorer/
-        user_access_token = "CAACEdEose0cBAKuDtgOAeIjs5meUktdZAyvKq1JO89Od5ad2hU0ibZBIscDGQGZAcksIJuKDswwK8OY9suXj3HuSYZBc02cfRZAZCZBoFwNiiIZAzhixZCTh0S753r8qh9yx2hm2g2BVbEFt9LkoVnl3vwkktgFNEGueFtZA1CKDR76mqZAVk8ll8Vqiz5eEN0lpvZALsgVgpVFEMdeZA3akSozVX"
+        user_access_token = "CAACEdEose0cBAEcd2mMYlweAFA6TZCXZCEcNB3XbSHk59LglGFq0sAPZBiRi1PjWidCZCCRYStKnNLEoMB5dZAG4ENI4d3R8aJFrZB2sPMKTzliwvxCluHzhnaWwce1tEXsiuMZAExlYaNdR8pkCX0EaLvguzS7EAfaO0ISv7obbp8GHqxAlzncihPk9Kag6zpq3ZCm6OTSqL1hZAEwBjfcZCZA"
         self.graph = GraphAPI(user_access_token)
+        self.fb_cache = Cache(FACEBOOK_CACHE,"eng1")
+        self.fb_cache.load()
+
+    def shutdown(self):
+        self.fb_cache.save()
 
     def search_Facebook(self, term):
-        cnt = [0, 0, 0, 0]
-        cnt = self.search_user(term, cnt)
-        cnt = self.search_page(term, cnt)
-        cnt = self.search_place(term, cnt)
-        if sum(cnt) < 15:
+        if self.fb_cache.search_cache(term) == None:
+            cnt = [0, 0, 0, 0]
+            cnt = self.search_user(term, cnt)
+            cnt = self.search_page(term, cnt)
+            cnt = self.search_place(term, cnt)
+            self.fb_cache.update_cache_from_list(term,cnt)
+        else:
+            m = self.fb_cache.search_cache(term).Matches
+            cnt = [m["person"],m["company"],m["place"],m["regular"]]
+            for i in range(len(cnt)):
+                cnt[i] = float(cnt[i])
+        if sum(cnt) < 25:
             cnt = [0, 0, 0, 10]
+        if cnt[1] + cnt[2] > 30:
+            cnt[0] = cnt[0]/10
         return cnt
 
     def search_user(self, term, cnt):
         res = self.get_results(term, "user")
         for i in res["data"]:
             #print i
-            #if (self.check_name(i,term,1)):
-            #    print self.graph.get(i["id"])
             cnt[0] += self.check_name(i, term, 0.1)
         return cnt
 
@@ -34,21 +48,21 @@ class FacebookSearch:
         res = self.get_results(term, "page")
         for i in res["data"]:
             #print i
-            if i["category"].lower() in self.company:
-                cnt[1] += self.check_name(i, term, 1)
-            elif i["category"].lower() in self.person:
+            if i["category"].lower() in self.person:
                 cnt[0] += self.check_name(i, term, 1)
+            elif i["category"].lower() in self.company:
+                cnt[1] += self.check_name(i, term, 1)
         return cnt
 
     def search_place(self, term, cnt):
         res = self.get_results(term, "place")
         for i in res["data"]:
-            # print i
+            #print i
             if i["category"].lower() in self.place:  
-                cnt[2] += self.check_name(i, term, 2)
+                cnt[2] += self.check_name(i, term, 4)
             for idx in range(len(i["category_list"])):
                 if i["category_list"][idx]["name"].lower() in self.place:
-                    cnt[2] += self.check_name(i, term, 2)
+                    cnt[2] += self.check_name(i, term, 4)
         return cnt
 
     @staticmethod

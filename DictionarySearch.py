@@ -21,7 +21,14 @@ class DictionarySearch:
             if self.dictionary[term.lower()][0].isupper():
                 return [10,10,10,0] # might be a NE
             else:
-                return [0,0,0,100] # probably a normal word
+                return [0,0,0,150] # probably a normal word
         else:
-            return [10,10,10,0] # probably a NE
+            if term.lower()[-1]=='s': #check for plural word
+                if term.lower()[:-1] in self.dictionary.keys():
+                    return [0,0,0,150]
+                else:
+                    return [10,10,10,0] # probably a NE
+            else:
+                return [10,10,10,0] # probably a NE
             
+

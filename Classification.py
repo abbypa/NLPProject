@@ -14,6 +14,9 @@ class DuckDuckGoWordOccurrenceClassifier:
         search_result = self.duckduckgo_search.general_search(term)
         return self.word_occurrence_classifier.calculate_score(term, search_result)
 
+    def shutdown(self):
+        return 1    
+
 
 class UpperCaseClassifier:
     def __init__(self):
@@ -28,6 +31,9 @@ class UpperCaseClassifier:
             result.Matches['person'] = result.Matches['company'] = result.Matches['place'] = self.normalized_score
         return result
 
+    def shutdown(self):
+        return 1
+
 
 class CompanyDuckDuckClassifier:
     def __init__(self):
@@ -41,6 +47,9 @@ class CompanyDuckDuckClassifier:
             if self.duckduckgo_search.general_search(term_to_search) != '':
                 result.Matches['company'] += 1
         return result
+    
+    def shutdown(self):
+        return 1
 
 
 class FacebookClassifier:
@@ -54,6 +63,9 @@ class FacebookClassifier:
             matches[categories[i]] = cnt[i]
         return ClassificationResult(term, matches)
 
+    def shutdown(self):
+        self.facebook_search.shutdown()
+
 class DictionaryClassifier:
     def __init__(self):
         self.dictionary_search = DictionarySearch()
@@ -65,13 +77,16 @@ class DictionaryClassifier:
             matches[categories[i]] = cnt[i]
         return ClassificationResult(term, matches)
 
+    def shutdown(self):
+        return 1
+
 
 weighted_classifiers = [
     [DuckDuckGoWordOccurrenceClassifier(), 1],
-    # [UpperCaseClassifier(), 1],
-    # [CompanyDuckDuckClassifier(), 1],
-    # [FacebookClassifier(), 1],
-    # [DictionaryClassifier(), 1]
+    [UpperCaseClassifier(), 1],
+    [CompanyDuckDuckClassifier(), 1],
+    [FacebookClassifier(), 1],
+    [DictionaryClassifier(), 1]
 ]
 
 
