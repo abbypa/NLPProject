@@ -66,6 +66,7 @@ class FacebookClassifier:
     def shutdown(self):
         self.facebook_search.shutdown()
 
+
 class DictionaryClassifier:
     def __init__(self):
         self.dictionary_search = DictionarySearch()
@@ -81,19 +82,24 @@ class DictionaryClassifier:
         return 1
 
 
-weighted_classifiers = [
-    [DuckDuckGoWordOccurrenceClassifier(), 1],
-    [UpperCaseClassifier(), 1],
-    [CompanyDuckDuckClassifier(), 1],
-    [FacebookClassifier(), 1],
-    [DictionaryClassifier(), 1]
-]
+class Classifier:
+    def __init__(self):
+        self.weighted_classifiers = [
+            [DuckDuckGoWordOccurrenceClassifier(), 1],
+            [UpperCaseClassifier(), 1],
+            [CompanyDuckDuckClassifier(), 1],
+            # [FacebookClassifier(), 1],
+            [DictionaryClassifier(), 1]
+        ]
 
+    def classify(self, term):
+        weighted_result = ClassificationResult(term)
+        for weighted_classifier in self.weighted_classifiers:
+            result = weighted_classifier[0].classify(term)
+            for (key, value) in result.Matches.items():
+                weighted_result.Matches[key] += value * weighted_classifier[1]
+        return weighted_result
 
-def classify(term):
-    weighted_result = ClassificationResult(term)
-    for weighted_classifier in weighted_classifiers:
-        result = weighted_classifier[0].classify(term)
-        for (key, value) in result.Matches.items():
-            weighted_result.Matches[key] += value * weighted_classifier[1]
-    return weighted_result
+    def shutdown(self):
+        for classifier in self.weighted_classifiers:
+            classifier[0].shutdown()

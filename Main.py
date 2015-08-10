@@ -2,16 +2,13 @@ import sys
 from ProcessCorpus import *
 import Cache
 
-DICTIONARY_PATH = r"C:\Users\Nini\Desktop\limudim\nlproj\git\Additional\dictionary.txt"
-FACEBOOK_CACHE = r"C:\Users\Nini\Desktop\limudim\nlproj\git\Additional\facebook_cache.txt"
+DICTIONARY_PATH = r".\Additional\dictionary.txt"
+FACEBOOK_CACHE = r".\Additional\facebook_cache.txt"
 
 
 def __main__(argv):
-    
-    process_corpus("eng1",1,argv[0])
 
-    for classifier in weighted_classifiers:
-        classifier[0].shutdown()
+    process_corpus("eng1", 1, argv[0])
     return 1
 
 
