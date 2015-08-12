@@ -1,6 +1,8 @@
 from facepy import GraphAPI
 from Cache import *
 from Main import FACEBOOK_CACHE
+import random
+import time
 
 class FacebookSearch:
     company = {"company", "non-profit organization","organization", "professional services", "product/service", "government organization", "church/religious organization"}
@@ -15,6 +17,7 @@ class FacebookSearch:
         self.graph = GraphAPI(user_access_token)
         self.fb_cache = Cache(FACEBOOK_CACHE,"eng1")
         self.fb_cache.load()
+        self.sleep_count = 0
 
     def shutdown(self):
         self.fb_cache.save()
@@ -22,6 +25,10 @@ class FacebookSearch:
     def search_Facebook(self, term):
         cache_result = self.fb_cache.search_cache(term)
         if cache_result is None:
+            self.sleep_count +=1
+            if self.sleep_count == 5:
+                time.sleep(random.randint(1,5))
+                self.sleep_count = 0
             cnt = [0, 0, 0, 0]
             cnt = self.search_user(term, cnt)
             cnt = self.search_page(term, cnt)
