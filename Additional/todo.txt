@@ -1,7 +1,37 @@
-- normalize each classifier (maybe using "normal word")
 - connect classifier to tokenizer
-- add sleep between searches (currently 1 second beforeprocessing a new line maybe it should be done more often?)
 - more classifers- save words before hits
 - tokenizer optimizations ('-)
 - installation script
-- after more runs (to find bugs)- surround all api calls with try-except and return an empty result
+- upper case- lower case stop word is OK
+- config.py- cache paths, dictionary path, classifier weights, word occurrence lower bound, upper case normalized grade,
+    facebook limit & bounds
+- duckduck languages
+- first run on N, than N-1 (update regulars only) ... finish with 1-gram (or just 2 and 1)
+
+
+- before submitting
+    - after more runs (to find bugs)- surround all api calls with try-except and return an empty result
+    - decide on facebook access token
+    - remove todo's, prints, extra files
+    - check on nova
+
+
+- book:
+    - general framework & tokenizer
+    - for each classifier- description, technology & alg, small experiment (words)
+    - issues from mail and in general (google, facebook user token, how to identify a normal word, languages...)
+    - optimizations- cache, stop words, window enlargement, person names
+    - experiments- learning & calibrating
+        - corpus- different texts (tourism, pop culture, news, wikipedia)- 3 each for training (2 for testing)
+        - run with different weights (including one classifier running), compare to stanford
+            - normalize some of the limits in config, accordingly
+        - large corpus?
+        - 2 working points (optimised weights)- normal texts, lower texts
+        - try different n-grams
+            - on 1-gram, celebrity name will match only if one name matches first
+    - test- 2 texts each
+        - run result weights on test files
+        - same experiment with all lower case, and with all upper case
+        - different ngrams
+    - another language?- try in our system, if not- show premise from google
+    - conclusion- scale out options (google, added data...)
