@@ -37,19 +37,19 @@ class Cache:
         cache_file.close()
 
     def search_cache(self,term):
-        if term in self.cache.keys():
-            return self.cache[term]
+        if term.lower() in self.cache.keys():
+            return self.cache[term.lower()]
         else:
             return None
 
     def update_cache(self,term,classification_result):
-        self.cache[term] = classification_result
+        self.cache[term.lower()] = classification_result
 
     def update_cache_from_list(self,term,cnt):
         matches = dict()
         for i in range(len(categories)):
             matches[categories[i]] = cnt[i]
-        self.cache[term] = ClassificationResult(term, matches)
+        self.cache[term.lower()] = ClassificationResult(term, matches)
 
         
         

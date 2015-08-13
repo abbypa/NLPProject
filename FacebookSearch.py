@@ -13,8 +13,9 @@ class FacebookSearch:
 
     def __init__(self):
         ##https://developers.facebook.com/tools/explorer/
-        user_access_token = "CAACEdEose0cBAEcd2mMYlweAFA6TZCXZCEcNB3XbSHk59LglGFq0sAPZBiRi1PjWidCZCCRYStKnNLEoMB5dZAG4ENI4d3R8aJFrZB2sPMKTzliwvxCluHzhnaWwce1tEXsiuMZAExlYaNdR8pkCX0EaLvguzS7EAfaO0ISv7obbp8GHqxAlzncihPk9Kag6zpq3ZCm6OTSqL1hZAEwBjfcZCZA"
-        self.graph = GraphAPI(user_access_token)
+        tok2 = "CAACEdEose0cBAOV6EZBmPZB0Lv4eGFSSNgobpXLAfpnTZB6lHjlNWsHsv4NYK2WiMzCJs8y3kusScFF5EUtAHIZAMZAVkvpwykuD4winGRFHTuPRzBGNcmveTLMcry67a1XQMinzwdiHpUc9rISOsHD1S2V7qZC1H3bxqjGJZAO6y5G4qdhOjMp0Oz9haC5etwyJp6S2xH3lAZDZD"
+        extended_user_access_token = "CAAJvf8esUFMBAAkaasoT3I3Ef8j2NPAbdozdMoA6DRPwO6CDXgWpNx8J5Wd6ZAcNzgQyP6Np0NweZB4Sl2zFrF75AP3VFiwlnlQZCwE0qGsvQ8Qo5ZBFzqf9sCqlvKaGgiBOsgnZB7NJVBb3YAIFhQMAlB4c4BDF36e84h4FDOjaIQX7ZBjlKpaYyxYdULBxYZD"
+        self.graph = GraphAPI(extended_user_access_token)
         self.fb_cache = Cache(FACEBOOK_CACHE,"eng1")
         self.fb_cache.load()
         self.sleep_count = 0
@@ -27,13 +28,14 @@ class FacebookSearch:
         if cache_result is None:
             self.sleep_count +=1
             if self.sleep_count == 5:
-                time.sleep(random.randint(1,5))
+                time.sleep(random.randint(1,10))
                 self.sleep_count = 0
             cnt = [0, 0, 0, 0]
             cnt = self.search_user(term, cnt)
             cnt = self.search_page(term, cnt)
             cnt = self.search_place(term, cnt)
             self.fb_cache.update_cache_from_list(term,cnt)
+            self.shutdown() ################################### DELETE!!!!
         else:
             m = cache_result.Matches
             cnt = [m["person"],m["company"],m["place"],m["regular"]]
@@ -55,11 +57,14 @@ class FacebookSearch:
     def search_page(self, term, cnt):
         res = self.get_results(term, "page")
         for i in res["data"]:
-            #print i
-            if i["category"].lower() in self.person:
-                cnt[0] += self.check_name(i, term, 1)
-            elif i["category"].lower() in self.company:
-                cnt[1] += self.check_name(i, term, 1)
+            try:
+                if i["category"].lower() in self.person:
+                    cnt[0] += self.check_name(i, term, 1)
+                elif i["category"].lower() in self.company:
+                    cnt[1] += self.check_name(i, term, 1)
+            except:
+                print "\n" + term
+                print i
         return cnt
 
     def search_place(self, term, cnt):

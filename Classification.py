@@ -102,10 +102,10 @@ class Classifier:
     def __init__(self):
         self.weighted_classifiers = [
             [DuckDuckGoWordOccurrenceClassifier(), 1],
-            # [UpperCaseClassifier(), 1],
-            # [CompanyDuckDuckClassifier(), 1],
-            # [FacebookClassifier(), 1],
-            # [DictionaryClassifier(), 1]
+            [UpperCaseClassifier(), 1],
+            [CompanyDuckDuckClassifier(), 1],
+            [FacebookClassifier(), 1],
+            [DictionaryClassifier(), 1]
         ]
 
     def classify(self, term):
