@@ -1,15 +1,17 @@
+# -*- coding: utf-8 -*-
+
 import sys
 import re
 import codecs
 
 char_encode = {"eng1": "utf-8" , "eng2" : "cp1252"}
-punctuation = {",", ":", ";", "\"", r"'", "/", r"\\", "\?", "!", "\(", "\)", "\[", "\]", "\{", "\}", "<" , ">", "-" ,"_"}
-punctuation_not_for_regex = {",", ":", ";", "\"", "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">", "-" ,"_", ".\r\n"}
+punctuation = {",", ":", ";", "\"",u'’', r"'", "/", r"\\", "\?", "!", "\(", "\)", "\[", "\]", "\{", "\}", "<" , ">", "-" ,"_"}
+punctuation_not_for_regex = {",", ":", ";", "\"","’", "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">" ,"_", ".\r\n"}
 
 
 def split_lines(lang,corpus):
     inputf = codecs.open(corpus, "r", encoding=char_encode[lang])
-    outputf = codecs.open(corpus + "_parsed_lines", "w", encoding=char_encode[lang])
+    outputf = codecs.open(corpus + "_p", "w", encoding=char_encode[lang])
     for l in inputf:
         line = l.split(" ")
         line.append(" ")
@@ -38,7 +40,7 @@ def count_dots(word):
 
 def split_punctuation(lang,corpus):
     inputf = codecs.open(corpus, "r", encoding=char_encode[lang])
-    outputf = codecs.open(corpus + "_parsed_punc", "w", encoding=char_encode[lang])
+    outputf = codecs.open(corpus + "arsed", "w", encoding=char_encode[lang])
     for line in inputf:
         for sym in punctuation: #pad punctuation marks with space
             if len(sym)==1:

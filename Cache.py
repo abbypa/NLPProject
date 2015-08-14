@@ -31,7 +31,7 @@ class Cache:
             tmp.append(self.cache[term].Matches["company"])
             tmp.append(self.cache[term].Matches["place"])
             tmp.append(self.cache[term].Matches["regular"])
-            for i in range(len(tmp)):
+            for i in range(1,len(tmp)):
                 tmp[i] = str(tmp[i])
             cache_file.write(",".join(tmp) + ",\r\n")
         cache_file.close()

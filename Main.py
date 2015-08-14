@@ -1,6 +1,7 @@
 import sys
+import os
 from ProcessCorpus import *
-import Cache
+from Tokenz import *
 
 DICTIONARY_PATH = r".\Additional\dictionary.txt"
 FACEBOOK_CACHE = r".\Additional\facebook_cache.txt"
@@ -9,8 +10,15 @@ DUCKDUCK_COMPANY_CACHE = r".\Additional\duckduck_company_cache.txt"
 
 
 def __main__(argv):
-
-    process_corpus("eng1", 1, argv[0])
+    if len(argv)!=1:
+        print " Usage: Main.py <corpus>"
+        return 1
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+    split_lines("eng1",argv[0])
+    split_punctuation("eng1",argv[0] + "_p")
+    os.remove(argv[0] + "_p")
+    process_corpus("eng1", 1, argv[0] + "_parsed")
     return 1
 
 

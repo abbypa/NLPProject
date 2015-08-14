@@ -13,9 +13,9 @@ class FacebookSearch:
 
     def __init__(self):
         ##https://developers.facebook.com/tools/explorer/
-        tok2 = "CAACEdEose0cBAOV6EZBmPZB0Lv4eGFSSNgobpXLAfpnTZB6lHjlNWsHsv4NYK2WiMzCJs8y3kusScFF5EUtAHIZAMZAVkvpwykuD4winGRFHTuPRzBGNcmveTLMcry67a1XQMinzwdiHpUc9rISOsHD1S2V7qZC1H3bxqjGJZAO6y5G4qdhOjMp0Oz9haC5etwyJp6S2xH3lAZDZD"
-        extended_user_access_token = "CAAJvf8esUFMBAAkaasoT3I3Ef8j2NPAbdozdMoA6DRPwO6CDXgWpNx8J5Wd6ZAcNzgQyP6Np0NweZB4Sl2zFrF75AP3VFiwlnlQZCwE0qGsvQ8Qo5ZBFzqf9sCqlvKaGgiBOsgnZB7NJVBb3YAIFhQMAlB4c4BDF36e84h4FDOjaIQX7ZBjlKpaYyxYdULBxYZD"
-        self.graph = GraphAPI(extended_user_access_token)
+        user_token = "CAACEdEose0cBAFtAkbTDhSjfVK7bTE1vm1iY4APdxZAnTZCkVC3B76d4BzHuVFlF70eu0OJX098cLemmZAbYJBGUggOSFKo56Pfp86ubyZCFF93GAeErkjGhBhY5CVUFpSSzj9ZCEPNXDu8ZBnuDWqjgMVq3CNA3XfbWlA0ITavn2fFVpgZBJ4O6e739kMDWdOLUHcmldUBIwZDZD"
+        extended_access_token = "CAAJvf8esUFMBAAkaasoT3I3Ef8j2NPAbdozdMoA6DRPwO6CDXgWpNx8J5Wd6ZAcNzgQyP6Np0NweZB4Sl2zFrF75AP3VFiwlnlQZCwE0qGsvQ8Qo5ZBFzqf9sCqlvKaGgiBOsgnZB7NJVBb3YAIFhQMAlB4c4BDF36e84h4FDOjaIQX7ZBjlKpaYyxYdULBxYZD"
+        self.graph = GraphAPI(user_token)
         self.fb_cache = Cache(FACEBOOK_CACHE,"eng1")
         self.fb_cache.load()
         self.sleep_count = 0
@@ -63,7 +63,7 @@ class FacebookSearch:
                 elif i["category"].lower() in self.company:
                     cnt[1] += self.check_name(i, term, 1)
             except:
-                print "\n" + term
+                #print "\n" + term
                 print i
         return cnt
 
