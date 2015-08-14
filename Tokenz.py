@@ -6,13 +6,14 @@ import codecs
 
 char_encode = {"eng1": "utf-8" , "eng2" : "cp1252"}
 punctuation = {",", ":", ";", "\"",u'’', r"'", "/", r"\\", "\?", "!", "\(", "\)", "\[", "\]", "\{", "\}", "<" , ">", "-" ,"_"}
-punctuation_not_for_regex = {",", ":", ";", "\"","’", "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">" ,"_", ".\r\n"}
+punctuation_not_for_regex = {",", ":", ";", "\"", "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">" ,"_", ".\r\n"}
 
 
 def split_lines(lang,corpus):
     inputf = codecs.open(corpus, "r", encoding=char_encode[lang])
     outputf = codecs.open(corpus + "_p", "w", encoding=char_encode[lang])
     for l in inputf:
+        l = re.sub("  ", " ",l)
         line = l.split(" ")
         line.append(" ")
         cpy = ""

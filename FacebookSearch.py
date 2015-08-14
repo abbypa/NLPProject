@@ -13,7 +13,7 @@ class FacebookSearch:
 
     def __init__(self):
         ##https://developers.facebook.com/tools/explorer/
-        user_token = "CAACEdEose0cBAFtAkbTDhSjfVK7bTE1vm1iY4APdxZAnTZCkVC3B76d4BzHuVFlF70eu0OJX098cLemmZAbYJBGUggOSFKo56Pfp86ubyZCFF93GAeErkjGhBhY5CVUFpSSzj9ZCEPNXDu8ZBnuDWqjgMVq3CNA3XfbWlA0ITavn2fFVpgZBJ4O6e739kMDWdOLUHcmldUBIwZDZD"
+        user_token = "CAACEdEose0cBANlWlrFBm0gJby31tehjXIGUZCKlvXPfHbXEo47wbCXYqSuQkZCDEhrE5ktYZBGmuQfwjgkxqC7dintVrjjIZCSN3eYPCXnHfZC60ZBcjZBc15XfFYLGYpLCiwQ0t6snbyTLlXz04vpgjKpWvbodKu5A0I1orZCX7niAPfd9DjqNKh7EIlFgxClscpqgcwYZAoQZDZD"
         extended_access_token = "CAAJvf8esUFMBAAkaasoT3I3Ef8j2NPAbdozdMoA6DRPwO6CDXgWpNx8J5Wd6ZAcNzgQyP6Np0NweZB4Sl2zFrF75AP3VFiwlnlQZCwE0qGsvQ8Qo5ZBFzqf9sCqlvKaGgiBOsgnZB7NJVBb3YAIFhQMAlB4c4BDF36e84h4FDOjaIQX7ZBjlKpaYyxYdULBxYZD"
         self.graph = GraphAPI(user_token)
         self.fb_cache = Cache(FACEBOOK_CACHE,"eng1")
@@ -31,9 +31,12 @@ class FacebookSearch:
                 time.sleep(random.randint(1,10))
                 self.sleep_count = 0
             cnt = [0, 0, 0, 0]
-            cnt = self.search_user(term, cnt)
-            cnt = self.search_page(term, cnt)
-            cnt = self.search_place(term, cnt)
+            try:
+                cnt = self.search_user(term, cnt)
+                cnt = self.search_page(term, cnt)
+                cnt = self.search_place(term, cnt)
+            except:
+                pass
             self.fb_cache.update_cache_from_list(term,cnt)
             self.shutdown() ################################### DELETE!!!!
         else:

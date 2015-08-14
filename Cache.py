@@ -17,11 +17,12 @@ class Cache:
                 tmp = l.split(",")
                 matches = dict()
                 for i in range(len(categories)):
-                    matches[categories[i]] = int(tmp[i+1])
+                    matches[categories[i]] = float(tmp[i+1])
                 self.cache[tmp[0]] = ClassificationResult(tmp[0], matches)
             cache_file.close()
-        except:  # cache corrupted- continue without
-            pass
+        except Exception, e:  # cache corrupted- continue without
+            print e
+            print(tmp[0])
 
     def save(self):
         cache_file = codecs.open(self.cache_path, "w", encoding=char_encode[self.lang])

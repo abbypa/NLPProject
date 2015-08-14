@@ -1,10 +1,13 @@
+# -*- coding: utf-8 -*-
+
+
 from Tokenz import char_encode, punctuation_not_for_regex
 import codecs
 from Classification import *
 from OutputFormat import *
 import time
 
-stop_words = {"-","t","d","ll","ve","m","re","s", "a", "able", "about", "across", "after", "all", "almost", "also", "am", "among", "an", "and", "any",
+stop_words = {u'’',"-","t","d","ll","ve","m","re","s", "a", "able", "about", "across", "after", "all", "almost", "also", "am", "among", "an", "and", "any",
               "are", "as", "at", "be", "because", "been", "but", "by", "can", "cannot", "could", "dear", "did", "do",
               "does", "either", "else", "ever", "every", "for", "from", "get", "got", "had", "has", "have", "he", "her",
               "hers", "him", "his", "how", "however", "i", "if", "in", "into", "is", "it", "its", "just", "least",
@@ -29,7 +32,7 @@ def process_corpus(lang, ngram, corpus):
             if result[i].get_tag() == "regular":
                 term = line[i:i + ngram]
                 term = fix_term(line, i, term)
-                if len(term) != 0 and term[0] != '':
+                if len(term) != 0 and term[0] != '' and term[0] != ' ':
                     result = test_term(result, line, i, term, "backward", classifier)
         print_result(outputf, result)
     inputf.close()
@@ -54,11 +57,15 @@ def get_winner(grades):
 
 def test_term(output, line, index, term, direction, classifier):
     # print term
-    grades = classifier.classify(" ".join(term)).Matches
-    new_tag = get_winner(grades)
-    if new_tag != "regular":
-        update_output(output, index, term, new_tag)
-        test_larger_window(output, line, index, term, direction, classifier)
+    t = " ".join(term)
+    while(t[0] == " "):
+        t = t[1:]
+    if t != None and len(t)>=1:
+        grades = classifier.classify(t).Matches
+        new_tag = get_winner(grades)
+        if new_tag != "regular":
+            update_output(output, index, term, new_tag)
+            test_larger_window(output, line, index, term, direction, classifier)
     return output
 
 
