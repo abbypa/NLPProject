@@ -54,6 +54,7 @@ class DuckduckgoSearch:
             stripped_url = self.url_compiled_regex.match(url).group(2)
         except:
             stripped_url = url
+        stripped_url = stripped_url.replace('&kad=' + self.language, '')
         return stripped_url.replace('?kp=1', '')
 
     def try_add_text_and_url(self, item):

@@ -6,6 +6,7 @@
 - duckduck languages
 - first run on N, than N-1 (update regulars only) ... finish with 1-gram (or just 2 and 1)
 - try enlarge the window forward after backward (if succedded- new_term, and if not- term)
+- full language support- different cache, different duckduck keywords, different facebook categories(?)
 
 
 - before submitting
