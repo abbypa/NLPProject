@@ -2,7 +2,6 @@
 - more classifers- save words before hits
 - tokenizer optimizations ('-)
 - installation script
-- upper case- lower case stop word is OK
 - config.py- cache paths, dictionary path, classifier weights, word occurrence lower bound, upper case normalized grade,
     facebook limit & bounds
 - duckduck languages

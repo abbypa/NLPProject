@@ -6,6 +6,7 @@ from DictionarySearch import *
 from Cache import *
 from Main import DUCKDUCK_WORD_OCCURRENCE_CACHE
 from Main import DUCKDUCK_COMPANY_CACHE
+from ProcessCorpus import stop_words
 
 
 class DuckDuckGoWordOccurrenceClassifier:
@@ -35,9 +36,9 @@ class UpperCaseClassifier:
     def classify(self, term):
         term_words = term.split()
         result = ClassificationResult(term)
-        if any(word[0].islower() for word in term_words):
+        if any(word[0].islower() and word not in stop_words for word in term_words):
             result.Matches['regular'] = self.normalized_score
-        else:  # all words start with a capital letter
+        else:  # each word either starts with a capital letter or is a stop words
             result.Matches['person'] = result.Matches['company'] = result.Matches['place'] = self.normalized_score
         return result
 
