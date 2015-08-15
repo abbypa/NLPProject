@@ -4,9 +4,7 @@ from DuckduckgoSearch import *
 from FacebookSearch import *
 from DictionarySearch import *
 from Cache import *
-from Main import DUCKDUCK_WORD_OCCURRENCE_CACHE
-from Main import DUCKDUCK_COMPANY_CACHE
-from ProcessCorpus import stop_words
+from Config import *
 
 
 class DuckDuckGoWordOccurrenceClassifier:
@@ -31,7 +29,7 @@ class DuckDuckGoWordOccurrenceClassifier:
 
 class UpperCaseClassifier:
     def __init__(self):
-        self.normalized_score = 10
+        self.normalized_score = UPPERCASE_NORMALIZED_SCORE
 
     def classify(self, term):
         term_words = term.split()
@@ -102,19 +100,20 @@ class DictionaryClassifier:
 class Classifier:
     def __init__(self):
         self.weighted_classifiers = [
-            #[DuckDuckGoWordOccurrenceClassifier(), 1],
-            #[UpperCaseClassifier(), 1],
-            #[CompanyDuckDuckClassifier(), 1],
-            [FacebookClassifier(), 1],
-            #[DictionaryClassifier(), 1]
+            [DuckDuckGoWordOccurrenceClassifier(), DUCK_DUCK_GO_WORD_OCCURRENCE_CLASSIFIER_WEIGHT],
+            [UpperCaseClassifier(), UPPERCASE_CLASSIFIER_WEIGHT],
+            [CompanyDuckDuckClassifier(), COMPANY_DUCK_DUCK_GO_CLASSIFIER_WEIGHT],
+            [FacebookClassifier(), FACEBOOK_CLASSIFIER_WEIGHT],
+            [DictionaryClassifier(), DICTIONARY_CLASSIFIER_WEIGHT]
         ]
 
     def classify(self, term):
         weighted_result = ClassificationResult(term)
         for weighted_classifier in self.weighted_classifiers:
-            result = weighted_classifier[0].classify(term)
-            for (key, value) in result.Matches.items():
-                weighted_result.Matches[key] += value * weighted_classifier[1]
+            if weighted_classifier[1] != 0:
+                result = weighted_classifier[0].classify(term)
+                for (key, value) in result.Matches.items():
+                    weighted_result.Matches[key] += value * weighted_classifier[1]
         return weighted_result
 
     def shutdown(self):

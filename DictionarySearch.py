@@ -1,7 +1,7 @@
 import sys
 import codecs
 from Tokenz import char_encode
-from Main import DICTIONARY_PATH
+from Config import DICTIONARY_PATH, DICTIONARY_NE_GRADE, DICTIONARY_NORMAL_WORD_GRADE
 
 class DictionarySearch:
 
@@ -12,23 +12,24 @@ class DictionarySearch:
             word = w.split("\n")[0].lower()
             self.dictionary[word] = w
         inputf.close()
-        
 
     def search_dictionary(self,term):
+        ne = DICTIONARY_NE_GRADE
+        norm = DICTIONARY_NORMAL_WORD_GRADE
         if len(term.split(" "))>1:
             return [0,0,0,0]  #dictionary has single words only, no point checking..
         if term.lower() in self.dictionary.keys():
             if self.dictionary[term.lower()][0].isupper():
-                return [10,10,10,0] # might be a NE
+                return [ne,ne,ne,0] # might be a NE
             else:
-                return [0,0,0,150] # probably a normal word
+                return [0,0,0,norm] # probably a normal word
         else:
             if term.lower()[-1]=='s': #check for plural word
                 if term.lower()[:-1] in self.dictionary.keys():
-                    return [0,0,0,150]
+                    return [0,0,0,norm]
                 else:
-                    return [10,10,10,0] # probably a NE
+                    return [ne,ne,ne,0] # probably a NE
             else:
-                return [10,10,10,0] # probably a NE
+                return [ne,ne,ne,0] # probably a NE
             
 

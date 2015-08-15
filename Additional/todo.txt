@@ -2,10 +2,10 @@
 - more classifers- save words before hits
 - tokenizer optimizations ('-)
 - installation script
-- config.py- cache paths, dictionary path, classifier weights, word occurrence lower bound, upper case normalized grade,
-    facebook limit & bounds
+- config.py- facebook limit & bounds
 - duckduck languages
 - first run on N, than N-1 (update regulars only) ... finish with 1-gram (or just 2 and 1)
+- newline bug - /NE  We/O can/O tell/NE you/O
 
 
 - before submitting

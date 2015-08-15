@@ -1,6 +1,6 @@
 from facepy import GraphAPI
 from Cache import *
-from Main import FACEBOOK_CACHE
+from Config import FACEBOOK_CACHE
 import random
 import time
 

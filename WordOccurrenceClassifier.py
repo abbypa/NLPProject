@@ -1,6 +1,6 @@
 import re
 from ClassificationCommon import *
-
+from Config import WORD_OCCURRENCE_MIN_HITS_TO_MATCH
 
 class WordOccurrenceClassifier:
 
@@ -19,7 +19,7 @@ class WordOccurrenceClassifier:
         ])
         self.categories = self.category_to_keywords.keys()
         self.delimiters = '[ _(),/.:\n]'
-        self.min_hits_to_match = 9
+        self.min_hits_to_match = WORD_OCCURRENCE_MIN_HITS_TO_MATCH
 
     def calculate_score(self, term, data):
         hits = {key: 0 for key in categories}
