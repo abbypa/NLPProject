@@ -43,9 +43,9 @@ def get_winner(grades):
 def test_term(output, line, index, term, direction, classifier):
     # print term
     t = " ".join(term)
-    while(t[0] == " "):
+    while len(t) >= 1 and t[0] == " ":
         t = t[1:]
-    if t != None and len(t)>=1:
+    if len(t) >= 1:
         grades = classifier.classify(t).Matches
         new_tag = get_winner(grades)
         if new_tag != "regular":

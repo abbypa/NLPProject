@@ -11,6 +11,8 @@ class OutputFormat:
     def get_output(self):
         if self.word == ".\r\n" or self.word == ".\n":
             return ".\r\n"
+        if self.word == "\r\n" or self.word == "\n":
+            return "\r\n"
         if self.word == " " or self.word == "":
             return ""
         if self.word in punctuation_not_for_regex:
