@@ -51,6 +51,9 @@ def test_term(output, line, index, term, direction, classifier):
         if new_tag != "regular":
             update_output(output, index, term, new_tag)
             test_larger_window(output, line, index, term, direction, classifier)
+        elif direction == "backward":
+            test_larger_window(output, line, index+1, term[1:], "forward", classifier)
+            # without the first word that made the term regular
     return output
 
 
