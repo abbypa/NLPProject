@@ -4,7 +4,7 @@ import sys
 import re
 import codecs
 
-char_encode = {"eng1": "utf-8" , "eng2" : "cp1252"}
+char_encode = {"en": "utf-8" , "eng2" : "cp1252", "es": "utf-8"}
 punctuation = {",", ":", ";", "\"",u'’', r"'", "/", r"\\", "\?", "!", "\(", "\)", "\[", "\]", "\{", "\}", "<" , ">", "-" ,"_"}
 punctuation_not_for_regex = {",", ":", ";", "\"", "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">" ,"_", ".\r\n"}
 

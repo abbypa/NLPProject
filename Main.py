@@ -10,10 +10,10 @@ def __main__(argv):
         return 1
     reload(sys)
     sys.setdefaultencoding('utf-8')
-    split_lines("eng1",argv[0])
-    split_punctuation("eng1",argv[0] + "_p")
+    split_lines(INPUT_LANGUAGE,argv[0])
+    split_punctuation(INPUT_LANGUAGE,argv[0] + "_p")
     os.remove(argv[0] + "_p")
-    process_corpus("eng1", 1, argv[0] + "_parsed")
+    process_corpus(INPUT_LANGUAGE, 1, argv[0] + "_parsed")
     return 1
 
 

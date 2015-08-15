@@ -1,6 +1,6 @@
 from facepy import GraphAPI
 from Cache import *
-from Config import FACEBOOK_CACHE
+from Config import FACEBOOK_CACHE, INPUT_LANGUAGE
 import random
 import time
 
@@ -16,7 +16,7 @@ class FacebookSearch:
         user_token = "CAACEdEose0cBANlWlrFBm0gJby31tehjXIGUZCKlvXPfHbXEo47wbCXYqSuQkZCDEhrE5ktYZBGmuQfwjgkxqC7dintVrjjIZCSN3eYPCXnHfZC60ZBcjZBc15XfFYLGYpLCiwQ0t6snbyTLlXz04vpgjKpWvbodKu5A0I1orZCX7niAPfd9DjqNKh7EIlFgxClscpqgcwYZAoQZDZD"
         extended_access_token = "CAAJvf8esUFMBAAkaasoT3I3Ef8j2NPAbdozdMoA6DRPwO6CDXgWpNx8J5Wd6ZAcNzgQyP6Np0NweZB4Sl2zFrF75AP3VFiwlnlQZCwE0qGsvQ8Qo5ZBFzqf9sCqlvKaGgiBOsgnZB7NJVBb3YAIFhQMAlB4c4BDF36e84h4FDOjaIQX7ZBjlKpaYyxYdULBxYZD"
         self.graph = GraphAPI(user_token)
-        self.fb_cache = Cache(FACEBOOK_CACHE,"eng1")
+        self.fb_cache = Cache(FACEBOOK_CACHE,INPUT_LANGUAGE)
         self.fb_cache.load()
         self.sleep_count = 0
 

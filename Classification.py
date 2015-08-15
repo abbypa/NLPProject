@@ -11,7 +11,7 @@ class DuckDuckGoWordOccurrenceClassifier:
     def __init__(self):
         self.duckduckgo_search = DuckduckgoSearch(False)
         self.word_occurrence_classifier = WordOccurrenceClassifier()
-        self.cache = Cache(DUCKDUCK_WORD_OCCURRENCE_CACHE, "eng1")
+        self.cache = Cache(DUCKDUCK_WORD_OCCURRENCE_CACHE, INPUT_LANGUAGE)
         self.cache.load()
 
     def classify(self, term):
@@ -48,7 +48,7 @@ class CompanyDuckDuckClassifier:
     def __init__(self):
         self.duckduckgo_search = DuckduckgoSearch(True)
         self.company_postfix = ['corp', 'corporation', 'company', 'inc', 'headquarters']
-        self.cache = Cache(DUCKDUCK_COMPANY_CACHE, "eng1")
+        self.cache = Cache(DUCKDUCK_COMPANY_CACHE, INPUT_LANGUAGE)
         self.cache.load()
 
     def classify(self, term):

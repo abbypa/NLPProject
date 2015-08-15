@@ -1,5 +1,6 @@
 import duckduckgo
 import re
+from Config import INPUT_LANGUAGE
 
 
 class DuckduckgoSearch:
@@ -7,16 +8,16 @@ class DuckduckgoSearch:
         self.url_regex = 'https://duckduckgo.com(/.+)*/(.+)'
         self.url_compiled_regex = re.compile(self.url_regex)
         self.verbosity = verbosity
+        self.language = INPUT_LANGUAGE.lower() + '_' + INPUT_LANGUAGE.upper()
 
     def total_search(self, term):
         return self.i_feel_lucky(term) + '\n\n' + self.general_search(term)
 
-    @staticmethod
-    def i_feel_lucky(term):
-        return duckduckgo.get_zci(term)
+    def i_feel_lucky(self, term):
+        return duckduckgo.get_zci(term, kad=self.language)
 
     def general_search(self, term):
-        r = duckduckgo.query(term)
+        r = duckduckgo.query(term, kad=self.language)
         all_results = ''
         all_results += self.try_add_category(r, 'abstract', 'text')
         all_results += self.try_add_category(r, 'definition', 'text')

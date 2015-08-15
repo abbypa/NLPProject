@@ -1,13 +1,13 @@
 import sys
 import codecs
 from Tokenz import char_encode
-from Config import DICTIONARY_PATH, DICTIONARY_NE_GRADE, DICTIONARY_NORMAL_WORD_GRADE
+from Config import DICTIONARY_PATH, DICTIONARY_NE_GRADE, DICTIONARY_NORMAL_WORD_GRADE, DICTIONARY_ENCODING_LANGUAGE
 
 class DictionarySearch:
 
     def __init__(self):
         self.dictionary = dict()
-        inputf = codecs.open(DICTIONARY_PATH, "r", encoding=char_encode["eng2"])
+        inputf = codecs.open(DICTIONARY_PATH, "r", encoding=char_encode[DICTIONARY_ENCODING_LANGUAGE])
         for w in inputf:
             word = w.split("\n")[0].lower()
             self.dictionary[word] = w

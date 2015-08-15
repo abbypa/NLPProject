@@ -1,5 +1,9 @@
 # Al configurable parameters
 
+# Language
+DICTIONARY_ENCODING_LANGUAGE = 'eng2'
+INPUT_LANGUAGE = 'en'
+
 # Paths-
 DICTIONARY_PATH = r".\Additional\dictionary.txt"
 FACEBOOK_CACHE = r".\Additional\facebook_cache.txt"
