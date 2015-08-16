@@ -1,5 +1,8 @@
 # Al configurable parameters
 
+# General
+NGRAM = 1
+
 # Language
 DICTIONARY_ENCODING_LANGUAGE = 'eng2'
 INPUT_LANGUAGE = 'en'

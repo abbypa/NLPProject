@@ -5,7 +5,7 @@ from OutputFormat import *
 from Config import MAX_GRADE_FOR_REGULAR, WINNER_PERCENT
 import time
 
-def process_corpus(lang, ngram, corpus):
+def process_corpus(lang, max_ngram, corpus):
     classifier = Classifier()
     inputf = codecs.open(corpus, "r", encoding=char_encode[lang])
     outputf = codecs.open(corpus + "_result", "w", encoding=char_encode[lang])
@@ -13,13 +13,14 @@ def process_corpus(lang, ngram, corpus):
         time.sleep(1)
         line = l.split(" ")
         result = copy_line(line)
-        for i in range(len(line) - ngram + 1):
-            if result[i].get_tag() == "regular":
-                term = line[i:i + ngram]
-                term = fix_term(line, i, term)
-                if len(term) != 0 and term[0] != '' and term[0] != ' ':
-                    success_cnt=0
-                    result = test_term(result, line, i, term, "backward", classifier,success_cnt)
+        for ngram in range(max_ngram, 0, -1):
+            for i in range(len(line) - ngram + 1):
+                if result[i].get_tag() == "regular":
+                    term = line[i:i + ngram]
+                    term = fix_term(line, i, term)
+                    if len(term) != 0 and term[0] != '' and term[0] != ' ':
+                        success_cnt=0
+                        result = test_term(result, line, i, term, "backward", classifier,success_cnt)
         print_result(outputf, result)
     inputf.close()
     outputf.close()

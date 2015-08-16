@@ -2,6 +2,7 @@ import sys
 import os
 from ProcessCorpus import *
 from Tokenz import *
+from Config import NGRAM
 
 
 def __main__(argv):
@@ -13,7 +14,7 @@ def __main__(argv):
     split_lines(INPUT_LANGUAGE,argv[0])
     split_punctuation(INPUT_LANGUAGE,argv[0] + "_p")
     os.remove(argv[0] + "_p")
-    process_corpus(INPUT_LANGUAGE, 1, argv[0] + "_parsed")
+    process_corpus(INPUT_LANGUAGE, NGRAM, argv[0] + "_parsed")
     return 1
 
 
