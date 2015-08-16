@@ -10,14 +10,21 @@ from Config import *
 class DuckDuckGoWordOccurrenceClassifier:
     def __init__(self):
         self.duckduckgo_search = DuckduckgoSearch(False)
-        self.word_occurrence_classifier = WordOccurrenceClassifier(DUCKDUCK_WORD_OCCURRENCE_CACHE)
+        self.word_occurrence_classifier = WordOccurrenceClassifier()
+        self.cache = Cache(DUCKDUCK_WORD_OCCURRENCE_CACHE, INPUT_LANGUAGE)
+        self.cache.load()
 
     def classify(self, term):
+        cache_result = self.cache.search_cache(term)
+        if cache_result is not None:
+            return self.word_occurrence_classifier.normalize_results(ClassificationResult(term, cache_result.Matches))
         search_result = self.duckduckgo_search.general_search(term)
-        return self.word_occurrence_classifier.calculate_score(term, search_result)
+        result = self.word_occurrence_classifier.calculate_score(term, search_result)
+        self.cache.update_cache(term, result)
+        return self.word_occurrence_classifier.normalize_results(result)
 
     def shutdown(self):
-        self.word_occurrence_classifier.shutdown()
+        self.cache.save()
 
 
 class UpperCaseClassifier:
