@@ -10,21 +10,14 @@ from Config import *
 class DuckDuckGoWordOccurrenceClassifier:
     def __init__(self):
         self.duckduckgo_search = DuckduckgoSearch(False)
-        self.word_occurrence_classifier = WordOccurrenceClassifier()
-        self.cache = Cache(DUCKDUCK_WORD_OCCURRENCE_CACHE, INPUT_LANGUAGE)
-        self.cache.load()
+        self.word_occurrence_classifier = WordOccurrenceClassifier(DUCKDUCK_WORD_OCCURRENCE_CACHE)
 
     def classify(self, term):
-        cache_result = self.cache.search_cache(term)
-        if cache_result is not None:
-            return ClassificationResult(term, cache_result.Matches)
         search_result = self.duckduckgo_search.general_search(term)
-        result = self.word_occurrence_classifier.calculate_score(term, search_result)
-        self.cache.update_cache(term, result)
-        return result
+        return self.word_occurrence_classifier.calculate_score(term, search_result)
 
     def shutdown(self):
-        self.cache.save()
+        self.word_occurrence_classifier.shutdown()
 
 
 class UpperCaseClassifier:
@@ -101,10 +94,10 @@ class Classifier:
     def __init__(self):
         self.weighted_classifiers = [
             [DuckDuckGoWordOccurrenceClassifier(), DUCK_DUCK_GO_WORD_OCCURRENCE_CLASSIFIER_WEIGHT],
-         #   [UpperCaseClassifier(), UPPERCASE_CLASSIFIER_WEIGHT],
-         #   [CompanyDuckDuckClassifier(), COMPANY_DUCK_DUCK_GO_CLASSIFIER_WEIGHT],
-         #   [FacebookClassifier(), FACEBOOK_CLASSIFIER_WEIGHT],
-            [DictionaryClassifier(), DICTIONARY_CLASSIFIER_WEIGHT]
+            # [UpperCaseClassifier(), UPPERCASE_CLASSIFIER_WEIGHT],
+            # [CompanyDuckDuckClassifier(), COMPANY_DUCK_DUCK_GO_CLASSIFIER_WEIGHT],
+            # [FacebookClassifier(), FACEBOOK_CLASSIFIER_WEIGHT],
+            # [DictionaryClassifier(), DICTIONARY_CLASSIFIER_WEIGHT]
         ]
 
     def classify(self, term):

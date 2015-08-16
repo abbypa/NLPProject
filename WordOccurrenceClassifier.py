@@ -1,10 +1,12 @@
 import re
 from ClassificationCommon import *
-from Config import WORD_OCCURRENCE_MIN_HITS_TO_MATCH
+from Config import WORD_OCCURRENCE_MIN_HITS_TO_MATCH, INPUT_LANGUAGE
+from Cache import *
+
 
 class WordOccurrenceClassifier:
 
-    def __init__(self):
+    def __init__(self, cache_path):
         self.category_to_keywords = dict([
             ('person', ['he', 'she', 'born', 'age', 'person', 'people', 'his', 'her', 'raised',
                         'man', 'men', 'woman', 'women', 'male', 'female',
@@ -20,8 +22,14 @@ class WordOccurrenceClassifier:
         self.categories = self.category_to_keywords.keys()
         self.delimiters = '[ _(),/.:\n]'
         self.min_hits_to_match = WORD_OCCURRENCE_MIN_HITS_TO_MATCH
+        self.cache = Cache(cache_path, INPUT_LANGUAGE)
+        self.cache.load()
 
     def calculate_score(self, term, data):
+        cache_result = self.cache.search_cache(term)
+        if cache_result is not None:
+            return ClassificationResult(term, self.normalize_results(cache_result.Matches))
+
         hits = {key: 0 for key in categories}
         for word in re.split(self.delimiters, data):
             if word is '':
@@ -29,7 +37,11 @@ class WordOccurrenceClassifier:
             for key in self.category_to_keywords:
                 if word.lower() in self.category_to_keywords[key]:
                     hits[key] += 1
+        self.cache.update_cache(term, ClassificationResult(term, hits))
         return ClassificationResult(term, self.normalize_results(hits))
+
+    def shutdown(self):
+        self.cache.save()
 
     def normalize_results(self, hits):
         for category in categories:

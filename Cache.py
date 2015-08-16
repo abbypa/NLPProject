@@ -38,12 +38,12 @@ class Cache:
 
     def search_cache(self,term):
         if term.lower() in self.cache.keys():
-            return self.cache[term.lower()]
+            return ClassificationResult(term,self.cache[term.lower()].Matches.copy())
         else:
             return None
 
     def update_cache(self,term,classification_result):
-        self.cache[term.lower()] = classification_result
+        self.cache[term.lower()] = ClassificationResult(term, classification_result.Matches.copy())
 
     def update_cache_from_list(self,term,cnt):
         matches = dict()
