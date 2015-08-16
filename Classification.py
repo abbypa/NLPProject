@@ -18,7 +18,11 @@ class DuckDuckGoWordOccurrenceClassifier:
         cache_result = self.cache.search_cache(term)
         if cache_result is not None:
             return self.word_occurrence_classifier.normalize_results(ClassificationResult(term, cache_result.Matches))
-        search_result = self.duckduckgo_search.general_search(term)
+        try:
+            search_result = self.duckduckgo_search.general_search(term)
+        except:
+            self.shutdown()
+            raise
         result = self.word_occurrence_classifier.calculate_score(term, search_result)
         self.cache.update_cache(term, result)
         return self.word_occurrence_classifier.normalize_results(result)
@@ -58,8 +62,12 @@ class CompanyDuckDuckClassifier:
         result = ClassificationResult(term)
         for company_word in self.company_postfix:
             term_to_search = term + ' ' + company_word
-            if self.duckduckgo_search.general_search(term_to_search) != '':
-                result.Matches['company'] += 1
+            try:
+                if self.duckduckgo_search.general_search(term_to_search) != '':
+                    result.Matches['company'] += 1
+            except:
+                self.shutdown()
+                raise
         self.cache.update_cache(term, result)
         return result
     

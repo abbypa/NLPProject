@@ -4,6 +4,7 @@
 - installation script
 - config.py- facebook limit & bounds
 - full language support- different cache, different duckduck keywords, different facebook categories(?)
+- cache violation when no period in the line end (see tourist1.txt)
 
 
 - before submitting

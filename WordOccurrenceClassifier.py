@@ -13,17 +13,22 @@ class WordOccurrenceClassifier:
                         'actor', 'director', 'author', 'comedian',
                         'husband', 'wife', 'son', 'daughter', 'brother', 'sister']),
             ('company', ['corp', 'corporation', 'company', 'companies', 'inc', 'conglomerate',
-                         'founded', 'headquarters', 'headquartered', 'business', 'product', 'products']),
+                         'founded', 'headquarters', 'headquartered', 'business', 'product', 'products',
+                         'founder', 'founders', 'businesses', 'org', 'technology', 'services', 'own', 'owned']),
             ('place', ['located', 'place', 'places', 'city', 'cities', 'country', 'countries',
                        'area', 'areas', 'region', 'regions', 'landmark', 'landmarks', 'travel', 'park', 'parks',
                        'population', 'populated', 'district', 'districts'])
         ])
+        self.all_values = [item for sublist in self.category_to_keywords.values() for item in sublist]
         self.categories = self.category_to_keywords.keys()
         self.delimiters = '[ _(),/.:\n]'
         self.min_hits_to_match = WORD_OCCURRENCE_MIN_HITS_TO_MATCH
 
     def calculate_score(self, term, data):
         hits = {key: 0 for key in categories}
+        if term in self.all_values:
+            # just the indicator itself- probably normal
+            return ClassificationResult(term, hits)
         for word in re.split(self.delimiters, data):
             if word is '':
                 pass
