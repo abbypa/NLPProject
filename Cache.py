@@ -22,7 +22,6 @@ class Cache:
             cache_file.close()
         except Exception, e:  # cache corrupted- continue without
             print e
-            print(tmp[0])
 
     def save(self):
         cache_file = codecs.open(self.cache_path, "w", encoding=char_encode[self.lang])

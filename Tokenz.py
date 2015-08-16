@@ -6,7 +6,7 @@ import codecs
 
 char_encode = {"en": "utf-8" , "eng2" : "cp1252", "es": "utf-8"}
 punctuation = {",", ":", ";", "\"",u'’', r"'", "/", r"\\", "\?", "!", "\(", "\)", "\[", "\]", "\{", "\}", "<" , ">", "-" ,"_"}
-punctuation_not_for_regex = {",", ":", ";", "\"", "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">" ,"_", ".\r\n"}
+punctuation_not_for_regex = {",", ":", ";", "\"", "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">" ,"_", ".\r\n", "\r\n"}
 
 
 def split_lines(lang,corpus):
@@ -43,6 +43,7 @@ def split_punctuation(lang,corpus):
     inputf = codecs.open(corpus, "r", encoding=char_encode[lang])
     outputf = codecs.open(corpus + "arsed", "w", encoding=char_encode[lang])
     for line in inputf:
+        line = line.lstrip()
         for sym in punctuation: #pad punctuation marks with space
             if len(sym)==1:
                 line = re.sub(sym, " " + sym + " ", line)

@@ -18,7 +18,8 @@ def process_corpus(lang, ngram, corpus):
                 term = line[i:i + ngram]
                 term = fix_term(line, i, term)
                 if len(term) != 0 and term[0] != '' and term[0] != ' ':
-                    result = test_term(result, line, i, term, "backward", classifier)
+                    success_cnt=0
+                    result = test_term(result, line, i, term, "backward", classifier,success_cnt)
         print_result(outputf, result)
     inputf.close()
     outputf.close()
@@ -40,19 +41,18 @@ def get_winner(grades):
     return winner
 
 
-def test_term(output, line, index, term, direction, classifier):
-    # print term
-    t = " ".join(term)
-    while len(t) >= 1 and t[0] == " ":
-        t = t[1:]
+def test_term(output, line, index, term, direction, classifier,success_cnt):
+    #print term
+    t = " ".join(term).lstrip()
     if len(t) >= 1:
         grades = classifier.classify(t).Matches
         new_tag = get_winner(grades)
         if new_tag != "regular":
+            success_cnt+=1
             update_output(output, index, term, new_tag)
-            test_larger_window(output, line, index, term, direction, classifier)
-        elif direction == "backward":
-            test_larger_window(output, line, index+1, term[1:], "forward", classifier)
+            test_larger_window(output, line, index, term, direction, classifier,success_cnt)
+        elif success_cnt > 0 and direction == "backward":
+            test_larger_window(output, line, index+1, term[1:], "forward", classifier,success_cnt)
             # without the first word that made the term regular
     return output
 
@@ -66,19 +66,19 @@ def fix_term(line, index, term):
     return term
 
 
-def test_larger_window(output, line, index, term, direction, classifier):
+def test_larger_window(output, line, index, term, direction, classifier,success_cnt):
     if direction != "forward":
         if (index - 1) >= 0 and line[index - 1] not in punctuation_not_for_regex and line[index - 1] not in stop_words:
             new_term = line[index - 1:index + len(term)]
-            return test_term(output, line, index - 1, new_term, "backward", classifier)
-        return test_larger_window(output, line, index, term, "forward", classifier)
+            return test_term(output, line, index - 1, new_term, "backward", classifier,success_cnt)
+        return test_larger_window(output, line, index, term, "forward", classifier,success_cnt)
     else:
         if (index + len(term) + 1) < len(line):
             new_term = line[index:index + len(term) + 1]
             new_term = fix_term(line, index, new_term)
             if new_term == term:
                 return output
-            return test_term(output, line, index, new_term, "forward", classifier)
+            return test_term(output, line, index, new_term, "forward", classifier,success_cnt)
     return output
 
 
