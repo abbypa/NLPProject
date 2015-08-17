@@ -1,6 +1,3 @@
-- connect classifier to tokenizer
-- more classifers- save words before hits
-- tokenizer optimizations ('-) now also printed with classification (i.e.- The/NE Emmy/NE -/O winning/O)
 - installation script
 - config.py- facebook limit & bounds
 - full language support- different cache, different duckduck keywords, different facebook categories(?)

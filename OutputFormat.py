@@ -1,4 +1,4 @@
-from Tokenz import punctuation_not_for_regex
+from Tokenz import punctuation_for_printing
 
 class OutputFormat:
 
@@ -15,7 +15,7 @@ class OutputFormat:
             return "\r\n"
         if self.word == " " or self.word == "":
             return ""
-        if self.word in punctuation_not_for_regex:
+        if self.word in punctuation_for_printing:
             return self.word
         return self.word + "/" + self.tag_translation[self.tag]
 
