@@ -20,9 +20,11 @@ class DuckDuckGoWordOccurrenceClassifier:
             return self.word_occurrence_classifier.normalize_results(ClassificationResult(term, cache_result.Matches))
         try:
             search_result = self.duckduckgo_search.general_search(term)
-        except:
-            self.shutdown()
-            raise
+        except Exception,e:
+            print term
+            print e
+            return ClassificationResult(term, {key: -1 for key in categories})
+
         result = self.word_occurrence_classifier.calculate_score(term, search_result)
         self.cache.update_cache(term, result)
         return self.word_occurrence_classifier.normalize_results(result)
