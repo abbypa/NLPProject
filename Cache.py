@@ -11,17 +11,19 @@ class Cache:
         self.cache = dict()
 
     def load(self):
-        try:
+
             cache_file = codecs.open(self.cache_path, "r", encoding=char_encode[self.lang])
             for l in cache_file:
-                tmp = l.split(",")
-                matches = dict()
-                for i in range(len(categories)):
-                    matches[categories[i]] = float(tmp[i+1])
-                self.cache[tmp[0]] = ClassificationResult(tmp[0], matches)
+                try:
+                    tmp = l.split(",")
+                    matches = dict()
+                    for i in range(len(categories)):
+                        matches[categories[i]] = float(tmp[i+1])
+                    self.cache[tmp[0]] = ClassificationResult(tmp[0], matches)
+                except Exception, e:  # cache corrupted- continue without
+                    print e
             cache_file.close()
-        except Exception, e:  # cache corrupted- continue without
-            print e
+
 
     def save(self):
         cache_file = codecs.open(self.cache_path, "w", encoding=char_encode[self.lang])

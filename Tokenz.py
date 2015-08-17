@@ -5,10 +5,11 @@ import re
 import codecs
 
 char_encode = {"en": "utf-8" , "eng2" : "cp1252", "es": "utf-8"}
-punctuation = {",", ":", ";", "\"",u'’', r"'", "/", r"\\", "\?", "!", "\(", "\)", "\[", "\]", "\{", "\}", "<" , ">", "-" ,"_"}
-punctuation_not_for_regex = {",", ":", ";", "\"", "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">" ,"_", ".\r\n", "\r\n"}
-punctuation_for_printing = {",", ":", ";", "\"",u'’', "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">", "-","_", ".\r\n", "\r\n"}
+punctuation = {",", ":", ";", "\"",u'’',u'“',u'”', r"'", "/", r"\\", "\?", "!", "\(", "\)", "\[", "\]", "\{", "\}", "<" , ">", "-" ,"_"}
+punctuation_not_for_regex = {",", ":", ";", "\"",u'“',u'”', "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">" ,"_", ".\r\n", "\r\n"}
+punctuation_for_printing = {",", ":", ";", "\"",u'’',u'“',u'”', "'", "/", "\\", ".", "?", "!", "(", ")", "[", "]", "{", "}", "<" , ">" ,"-", "_", ".\r\n", "\r\n"}
 
+titles = {"dr.","esq.","hon.", "jr.", "mr.", "mrs.", "ms.", "messrs.", "mmes." , "msgr." , "prof.", "rev.","rt. hon.","sr.","st."}
 
 def split_lines(lang,corpus):
     inputf = codecs.open(corpus, "r", encoding=char_encode[lang])
@@ -20,7 +21,7 @@ def split_lines(lang,corpus):
         cpy = ""
         for i in range(len(line)-1):
             if "." in line[i]:
-                if line[i+1][0].islower() or count_dots(line[i])>1:
+                if line[i+1][0].islower() or count_dots(line[i])>1 or line[i].lower() in titles:
                     cpy = cpy + " " + line[i]
                 else:
                     tmp = line[i].split(".")
