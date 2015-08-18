@@ -13,11 +13,13 @@ class OutputFormat:
             return ".\r\n"
         if self.word == "\r\n" or self.word == "\n":
             return "\r\n"
+        if self.word.endswith("\n"):
+            return self.word.strip() + "/" + self.tag_translation[self.tag] + "\r\n"
         if self.word == " " or self.word == "":
             return ""
         if self.word in punctuation_for_printing:
             return self.word
-        return self.word + "/" + self.tag_translation[self.tag]
+        return self.word + "/" + self.tag_translation[self.tag] + " "
 
     def update_tag(self, tag):
         self.tag = tag

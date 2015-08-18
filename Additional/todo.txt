@@ -1,7 +1,4 @@
 - installation script
-- config.py- facebook limit & bounds
-- full language support- different cache, different duckduck keywords, different facebook categories(?)
-- cache violation when no period in the line end (see tourist1.txt)
 
 
 - before submitting
@@ -12,21 +9,18 @@
 
 
 - book:
-    - general framework & tokenizer
-    - for each classifier- description, technology & alg, small experiment (words)
+    - manual ragging- Noga- wiki & news, Abigail- Entertainment & tourist
+    - script to compare and generate results (FalsePositive, FalseNegative, Correct, Confused, Partial (NE instead of specific))
     - issues from mail and in general (google, facebook user token, how to identify a normal word, languages...)
-    - optimizations- cache, stop words, window enlargement, person names
     - experiments- learning & calibrating
-        - corpus- different texts (tourism, pop culture, news, wikipedia)- 3 each for training (2 for testing)
-        - run with different weights (including one classifier running), compare to stanford
-            - normalize some of the limits in config, accordingly
-        - large corpus?
-        - 2 working points (optimised weights)- normal texts, lower texts
-        - try different n-grams
+        - for each classifier- small experiment
+        - run with different weights
+        - consider- 2 working points (optimised weights)- normal texts, lower texts
+        - try different n-grams (duckduck)
             - on 1-gram, celebrity name will match only if one name matches first
     - test- 2 texts each
         - run result weights on test files
+        - compare to stanford
         - same experiment with all lower case, and with all upper case
-        - different ngrams
     - another language?- try in our system, if not- show premise from google
     - conclusion- scale out options (google, added data...)

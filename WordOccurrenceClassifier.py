@@ -8,7 +8,7 @@ class WordOccurrenceClassifier:
     def __init__(self):
         self.category_to_keywords = dict([
             ('person', ['he', 'she', 'born', 'age', 'person', 'people', 'his', 'her', 'raised',
-                        'man', 'men', 'woman', 'women', 'male', 'female',
+                        'man', 'men', 'woman', 'women', 'male', 'female', 'family', 'jr',
                         'politician', 'artist', 'writer', 'athlete', 'musician', 'entertainer',
                         'actor', 'director', 'author', 'comedian',
                         'husband', 'wife', 'son', 'sons', 'daughter', 'daughters', 'brother', 'brothers', 'sister', 'sisters']),

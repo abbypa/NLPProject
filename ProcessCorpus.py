@@ -44,7 +44,7 @@ def get_winner(grades):
 
 def test_term(output, line, index, term, direction, classifier,success_cnt):
     #print term
-    t = " ".join(term).lstrip()
+    t = " ".join(term).strip()
     if len(t) >= 1:
         grades = classifier.classify(t).Matches
         new_tag = get_winner(grades)
@@ -85,7 +85,7 @@ def test_larger_window(output, line, index, term, direction, classifier,success_
 
 def print_result(outputfile, result):
     for i in range(len(result)):
-        outputfile.write(result[i].get_output() + " ")
+        outputfile.write(result[i].get_output())
 
 
 def update_output(output, index, term, tag):
