@@ -1,6 +1,6 @@
 from facepy import GraphAPI
 from Cache import *
-from Config import FACEBOOK_CACHE, INPUT_LANGUAGE
+from Config import *
 import random
 import time
 
@@ -46,9 +46,9 @@ class FacebookSearch:
             cnt = [m["person"],m["company"],m["place"],m["regular"]]
             for i in range(len(cnt)):
                 cnt[i] = float(cnt[i])
-        if sum(cnt) < 25:
+        if sum(cnt) < FACEBOOK_NE_MIN_COUNT:
             cnt = [0, 0, 0, 10]
-        if cnt[1] + cnt[2] > 30:
+        if cnt[1] + cnt[2] > FACEBOOK_BALANCE_OUT_NAME:
             cnt[0] = cnt[0]/10
         return cnt
 
@@ -56,7 +56,7 @@ class FacebookSearch:
         res = self.get_results(term, "user")
         for i in res["data"]:
             #print i
-            cnt[0] += self.check_name(i, term, 0.1)
+            cnt[0] += self.check_name(i, term, FACEBOOK_USER_PRECISE_MUL)
         return cnt
 
     def search_page(self, term, cnt):
@@ -64,9 +64,9 @@ class FacebookSearch:
         for i in res["data"]:
             try:
                 if i["category"].lower() in self.person:
-                    cnt[0] += self.check_name(i, term, 1)
+                    cnt[0] += self.check_name(i, term, FACEBOOK_PAGE_PRECISE_MUL)
                 elif i["category"].lower() in self.company:
-                    cnt[1] += self.check_name(i, term, 1)
+                    cnt[1] += self.check_name(i, term, FACEBOOK_PAGE_PRECISE_MUL)
             except:
                 #print "\n" + term
                 print i
@@ -77,10 +77,10 @@ class FacebookSearch:
         for i in res["data"]:
             #print i
             if i["category"].lower() in self.place:  
-                cnt[2] += self.check_name(i, term, 4)
+                cnt[2] += self.check_name(i, term, FACEBOOK_PLACE_PRECISE_MUL)
             for idx in range(len(i["category_list"])):
                 if i["category_list"][idx]["name"].lower() in self.place:
-                    cnt[2] += self.check_name(i, term, 4)
+                    cnt[2] += self.check_name(i, term, FACEBOOK_PLACE_PRECISE_MUL)
         return cnt
 
     @staticmethod
@@ -98,4 +98,4 @@ class FacebookSearch:
         return 0
 
     def get_results(self, term, querytype):
-        return self.graph.search(term, querytype, limit=200)
+        return self.graph.search(term, querytype, limit=FACEBOOK_QUERY_LIMIT)
