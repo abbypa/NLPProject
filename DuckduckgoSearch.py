@@ -1,5 +1,6 @@
 import duckduckgo
 import re
+import time
 from Config import INPUT_LANGUAGE
 
 
@@ -17,7 +18,12 @@ class DuckduckgoSearch:
         return duckduckgo.get_zci(term, kad=self.language)
 
     def general_search(self, term):
-        r = duckduckgo.query(term, kad=self.language)
+        try:
+            r = duckduckgo.query(term, kad=self.language)
+        except:
+            print "duckduck search error, trying again in 30 seconds..."
+            time.sleep(30)
+            r = duckduckgo.query(term, kad=self.language)
         all_results = ''
         all_results += self.try_add_category(r, 'abstract', 'text')
         all_results += self.try_add_category(r, 'definition', 'text')
