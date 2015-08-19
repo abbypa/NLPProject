@@ -1,14 +1,8 @@
-Google has become a soup of diverse businesses — much more than its original search function — so its co-founders moved Monday to change its structure to reflect its broad evolution.
+﻿Google has become a soup of diverse businesses — much more than its original search function — so its co-founders moved Monday to change its structure to reflect its broad evolution.
 The Mountain View, Calif., company will form a new parent company, called Alphabet, that will be run by Larry Page, co-founder and current CEO of Google — and will house Google, the search company, as well as Nest, its thermostat company, and Calico, a unit devoted to age and longevity, Google X and YouTube.
-The radical re-jiggering was announced by Page in a blog post.
-The move follows growing criticism that Google’s hodgepodge of businesses has become unwieldy for investors and managers alike.
-Insiders speculated that the new holding company could also pave the way for spinoffs.
 Page will become CEO of Alphabet, with co-founder Sergey Brin becoming Alphabet’s president. Vice Chairman Eric Schmidt will likewise retain his title for Alphabet.
 Sundar Pichai, Google’s head of product and engineering for online businesses, will become CEO of Google Inc., a subsidiary that will include the search engine, YouTube, Android operating system and Chrome browser.
 Indeed, Page signaled that he and Brin are looking for more room to focus on the Google X’s moonshot end of the business, which is chasing everything from driverless cars to a reversal of the
 human aging process.
-“Sergey and I are seriously in the business of starting new things,” Page wrote, noting that Alphabet will include the X lab, the incubator of its drone-delivery project. “We are also stoked about growing our investment arms, Ventures and Capital, as part of this new structure.”
 Ruth Porat, who recently joined as chief financial officer from Morgan Stanley, will retain her title at both Alphabet and the Google subsidiary.
-Alphabet will replace Google as the publicly traded entity and all shares of Google will automatically convert into the same number of shares of Alphabet. The shares will continue to trade on
-Nasdaq as GOOGL and GOOG.
-The restructuring is slated for later this year.
+Alphabet will replace Google as the publicly traded entity and all shares of Google will automatically convert into the same number of shares of Alphabet. The shares will continue to trade on Nasdaq as GOOGL and GOOG.
