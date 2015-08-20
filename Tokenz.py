@@ -20,7 +20,7 @@ def split_lines(lang,corpus):
         cpy = ""
         for i in range(len(line)-1):
             if "." in line[i]:
-                if line[i+1][0].islower() or count_dots(line[i])>1 or line[i].lower() in titles:
+                if line[i+1][0].islower() or count_dots(line[i])>1 or line[i].lower() in titles or len(line[i])==2:
                     cpy = cpy + " " + line[i]
                 else:
                     tmp = line[i].split(".")
