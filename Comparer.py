@@ -1,17 +1,17 @@
 import codecs
-from Tokenz import char_encode
+from Tokenz import char_encode, punctuation_for_printing
 import sys
 
 
 def __main__(argv):
-    corpus = ".\Corpus\Entertainment1.txt"
+    corpus = ".\Corpus\Tagged\News4.txt"
     lang = "en"
     inputf = codecs.open(corpus + "_parsed_result", "r", encoding=char_encode[lang])
     expected = codecs.open(corpus + "_expected", "r", encoding=char_encode[lang])
     outputf = codecs.open(corpus + "_comparison_result", "w", encoding=char_encode[lang])
     tested_lines = inputf.readlines()
     expected_lines = expected.readlines()
-
+ 
     if len(tested_lines) != len(expected_lines):
         raise Exception('bad lines number: expected {} and got {}'.format(len(expected_lines), len(tested_lines)))
 
@@ -27,8 +27,10 @@ def __main__(argv):
             raise Exception('bad line len: expected {} and got {}'.format(len(expected_line), len(tested_line)))
 
         for i in range(len(expected_line)):
+            #print(expected_line[i] + "------" + tested_line[i])
             if expected_line[i] == tested_line[i]:
-                success += 1
+                if expected_line[i] not in punctuation_for_printing:
+                    success += 1
                 continue
             tagged_expected = expected_line[i].split('/')
             tagged_tested = tested_line[i].split('/')
