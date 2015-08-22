@@ -48,7 +48,7 @@ def __main__(argv):
             else:
                 if tag_expected == 'NE' and tag_tested == 'O':
                     false_negative_ne += 1
-                if tag_expected == 'NE' and tag_tested != 'O':  # this should be some other name type
+                elif tag_expected == 'NE' and tag_tested != 'O':  # this should be some other name type
                     confuse_ne += 1
                 elif tag_expected != 'O' and tag_expected != 'NE' and tag_tested != 'O' and tag_tested != 'NE':
                     confuse += 1
