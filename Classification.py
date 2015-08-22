@@ -55,12 +55,13 @@ class CompanyDuckDuckClassifier:
         self.duckduckgo_search = DuckduckgoSearch(True)
         self.company_postfix = ['corp', 'corporation', 'company', 'inc', 'headquarters']
         self.cache = Cache(DUCKDUCK_COMPANY_CACHE, INPUT_LANGUAGE)
+        self.min_hits_to_match = DUCKDUCK_COMPANY_MIN_HITS_TO_MATCH
         self.cache.load()
 
     def classify(self, term):
         cache_result = self.cache.search_cache(term)
         if self.cache.search_cache(term) is not None:
-            return ClassificationResult(term, cache_result.Matches)
+            return self.normalize_results(ClassificationResult(term, cache_result.Matches))
         result = ClassificationResult(term)
         for company_word in self.company_postfix:
             term_to_search = term + ' ' + company_word
@@ -72,7 +73,12 @@ class CompanyDuckDuckClassifier:
                 print e
                 return ClassificationResult(term, {key: -1 for key in categories})
         self.cache.update_cache(term, result)
-        return result
+        return self.normalize_results(result)
+
+    def normalize_results(self, classification_result):
+        if classification_result.Matches['company'] < self.min_hits_to_match:
+            classification_result.Matches['company'] = 0
+        return classification_result
     
     def shutdown(self):
         self.cache.save()

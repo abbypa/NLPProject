@@ -16,6 +16,7 @@ DUCKDUCK_COMPANY_CACHE = r".\Additional\duckduck_company_cache.txt"
 # Specific classifiers numeric configurations-
 UPPERCASE_NORMALIZED_SCORE = 10
 WORD_OCCURRENCE_MIN_HITS_TO_MATCH = dict([('person', 10), ('company', 15), ('place', 15)])
+DUCKDUCK_COMPANY_MIN_HITS_TO_MATCH = 2
 DICTIONARY_NORMAL_WORD_GRADE = 150
 DICTIONARY_NE_GRADE = 10
 FACEBOOK_QUERY_LIMIT = 200

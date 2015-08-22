@@ -2,9 +2,8 @@ import codecs
 from Tokenz import char_encode, punctuation_for_printing
 import sys
 
-
 def __main__(argv):
-    corpus = ".\Corpus\Tagged\News1.txt"
+    corpus = r".\Corpus\Tagged\all.txt"
     lang = "en"
     inputf = codecs.open(corpus + "_parsed_result", "r", encoding=char_encode[lang])
     expected = codecs.open(corpus + "_expected", "r", encoding=char_encode[lang])
@@ -16,6 +15,9 @@ def __main__(argv):
         raise Exception('bad lines number: expected {} and got {}'.format(len(expected_lines), len(tested_lines)))
 
     success = partial_success = false_positive = false_negative = confuse = false_negative_ne = confuse_ne = 0
+    tags = ["NE", "ORGANIZATION", "LOCATION", "PERSON"]
+    fp = {key: 0 for key in tags}
+    fn = {key: 0 for key in tags}
     outputf.writelines("\t".join(["term", "tag_expected", "tag_tested"]) + '\n')
 
     for line_num in range(len(tested_lines)):
@@ -54,13 +56,16 @@ def __main__(argv):
                     confuse += 1
                 elif tag_expected != 'O' and tag_tested == 'O':
                     false_negative += 1
+                    fn[tag_expected] += 1
                 elif tag_expected == 'O' and tag_tested != 'O':
                     false_positive += 1
+                    fp[tag_tested] += 1
                 else:  # should not happen
                     raise Exception('Invalid result')
     outputf.writelines(
-        'Total Result- success={} partial_success={} confuse={} false_negative={} false_positive={} false_negative_ne={} confuse_ne={}'.format(
+        'Total Result- success={} partial_success={} confuse={} false_negative={} false_positive={} false_negative_ne={} confuse_ne={}\n'.format(
             success, partial_success, confuse, false_negative, false_positive, false_negative_ne, confuse_ne))
+    outputf.writelines("fp = {} fn = {}\n".format(fp, fn))
     inputf.close()
     outputf.close()
 
