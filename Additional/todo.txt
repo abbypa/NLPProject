@@ -9,8 +9,6 @@
 
 
 - book:
-    - manual ragging- Noga- wiki & news, Abigail- Entertainment & tourist
-    - script to compare and generate results (FalsePositive, FalseNegative, Correct, Confused, Partial (NE instead of specific))
     - issues from mail and in general (google, facebook user token, how to identify a normal word, languages...)
     - experiments- learning & calibrating
         - for each classifier- small experiment
