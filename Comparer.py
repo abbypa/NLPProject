@@ -39,8 +39,8 @@ def __main__(argv):
                     'not the same word: expected {} and got {}'.format(tagged_expected[0], tagged_tested[0]))
 
             term = tagged_expected[0]
-            tag_expected = tagged_expected[1]
-            tag_tested = tagged_tested[1]
+            tag_expected = tagged_expected[1].strip()
+            tag_tested = tagged_tested[1].strip()
             outputf.writelines("\t".join([term, tag_expected, tag_tested]) + '\n')
 
             if tag_expected != 'O' and tag_tested == 'NE':
