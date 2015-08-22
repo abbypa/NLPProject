@@ -4,7 +4,7 @@ import sys
 
 
 def __main__(argv):
-    corpus = ".\Corpus\Tagged\News4.txt"
+    corpus = ".\Corpus\Tagged\News1.txt"
     lang = "en"
     inputf = codecs.open(corpus + "_parsed_result", "r", encoding=char_encode[lang])
     expected = codecs.open(corpus + "_expected", "r", encoding=char_encode[lang])
@@ -15,7 +15,7 @@ def __main__(argv):
     if len(tested_lines) != len(expected_lines):
         raise Exception('bad lines number: expected {} and got {}'.format(len(expected_lines), len(tested_lines)))
 
-    success = partial_success = false_positive = false_negative = confuse = 0
+    success = partial_success = false_positive = false_negative = confuse = false_negative_ne = confuse_ne = 0
     outputf.writelines("\t".join(["term", "tag_expected", "tag_tested"]) + '\n')
 
     for line_num in range(len(tested_lines)):
@@ -46,8 +46,10 @@ def __main__(argv):
             if tag_expected != 'O' and tag_tested == 'NE':
                 partial_success += 1
             else:
+                if tag_expected == 'NE' and tag_tested == 'O':
+                    false_negative_ne += 1
                 if tag_expected == 'NE' and tag_tested != 'O':  # this should be some other name type
-                    confuse += 1
+                    confuse_ne += 1
                 elif tag_expected != 'O' and tag_expected != 'NE' and tag_tested != 'O' and tag_tested != 'NE':
                     confuse += 1
                 elif tag_expected != 'O' and tag_tested == 'O':
@@ -57,8 +59,8 @@ def __main__(argv):
                 else:  # should not happen
                     raise Exception('Invalid result')
     outputf.writelines(
-        'Total Result- success={} partial_success={} confuse={} false_negative={} false_positive={}'.format(
-            success, partial_success, confuse, false_negative, false_positive))
+        'Total Result- success={} partial_success={} confuse={} false_negative={} false_positive={} false_negative_ne={} confuse_ne={}'.format(
+            success, partial_success, confuse, false_negative, false_positive, false_negative_ne, confuse_ne))
     inputf.close()
     outputf.close()
 
