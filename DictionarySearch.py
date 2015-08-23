@@ -9,7 +9,7 @@ class DictionarySearch:
         self.dictionary = dict()
         inputf = codecs.open(DICTIONARY_PATH, "r", encoding=char_encode[DICTIONARY_ENCODING_LANGUAGE])
         for w in inputf:
-            word = w.split("\n")[0].lower()
+            word = w.split("\r\n")[0].lower()
             self.dictionary[word] = w
         inputf.close()
 
@@ -18,7 +18,7 @@ class DictionarySearch:
         norm = DICTIONARY_NORMAL_WORD_GRADE
         if len(term.split(" "))>1:
             return [0,0,0,0]  #dictionary has single words only, no point checking..
-        if term.lower() in self.dictionary.keys():
+        elif term.lower() in self.dictionary.keys():
             if self.dictionary[term.lower()][0].isupper():
                 return [ne,ne,ne,0] # might be a NE
             else:

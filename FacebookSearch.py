@@ -13,7 +13,7 @@ class FacebookSearch:
 
     def __init__(self):
         ##https://developers.facebook.com/tools/explorer/
-        user_token = "CAACEdEose0cBACJWT3UXXmn218DC8VnDETodevOYD9RnEr8uWUifugZBqybfm3d8BTHXAEUWSkp0IxtX9iXoxLFT58ozSWkRt0wZAKIxKZBgdZA1uVIZCj2ZA6EU9zbtktYBPM2SitYyocfTp8UHENPXtMz54sAa14i18nKNEslhBHZCHAEulvUutrTKZA1YwGcudV157ihil716meoCfbbt"
+        user_token = "CAACEdEose0cBAKiqIM2A3XpbsqNwDYVCeIUZBpv0T6Q3qRDCi0BvoHSrjbSxZB0vgIjUw5OAOrIukFDQElbKcxUTEbqdZAr0ZAEFqba71gDLqRgkzyFhyheWwno375l8SgYUNRfytAmqpBvwNMrqkJyVwpzWMTdAZCBee0yN9SZAiAeQMrSgSqral47kRRmZCKRjPjUMzISRwUTo7RZCWkcG"
         extended_access_token = "CAAJvf8esUFMBAAkaasoT3I3Ef8j2NPAbdozdMoA6DRPwO6CDXgWpNx8J5Wd6ZAcNzgQyP6Np0NweZB4Sl2zFrF75AP3VFiwlnlQZCwE0qGsvQ8Qo5ZBFzqf9sCqlvKaGgiBOsgnZB7NJVBb3YAIFhQMAlB4c4BDF36e84h4FDOjaIQX7ZBjlKpaYyxYdULBxYZD"
         self.graph = GraphAPI(user_token)
         self.fb_cache = Cache(FACEBOOK_CACHE,INPUT_LANGUAGE)
@@ -42,6 +42,7 @@ class FacebookSearch:
             self.fb_cache.update_cache_from_list(term,cnt)
             self.shutdown() ################################### DELETE!!!!
         else:
+            print "FOUND!! " + term
             m = cache_result.Matches
             cnt = [m["person"],m["company"],m["place"],m["regular"]]
             for i in range(len(cnt)):
