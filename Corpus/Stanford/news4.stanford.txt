@@ -1,5 +1,6 @@
-LeBron/PERSON James/PERSON wo/O n't/O commit/O to/O play/O for/O Team/LOCATION USA/LOCATION at/O Rio/LOCATION Olympics/LOCATION LeBron/PERSON James/PERSON is/O in/O Las/LOCATION Vegas/LOCATION for/O a/O Team/O USA/O minicamp/O ,/O but/O that/O does/O n't/O necessarily/O mean/O he/O 's/O a/O lock/O for/O Rio/PERSON next/O year/O ./O 
-As/O noted/O by/O Kurt/PERSON Helin/PERSON of/O NBC/ORGANIZATION Sports/ORGANIZATION ,/O the/O 30-year-old/O James/PERSON has/O played/O in/O five/O straight/O NBA/O Finals/O and/O already/O is/O ninth/O on/O the/O NBA/ORGANIZATION 's/O all-time/O minutes/O list/O if/O you/O count/O the/O regular/O season/O ,/O playoffs/O and/O international/O play/O ./O 
-He/O 'll/O probably/O move/O up/O to/O seventh/O on/O that/O list/O after/O next/O year/O ./O 
-Should/O he/O decide/O to/O suit/O up/O ,/O it/O would/O be/O James/PERSON 's/O fourth/O appearance/O for/O Team/LOCATION USA/LOCATION ./O 
-Only/O Teofilio/PERSON Cruz/PERSON -LRB-/O Puerto/LOCATION Rico/LOCATION -RRB-/O ,/O Andrew/PERSON Gaze/PERSON -LRB-/O Australia/LOCATION -RRB-/O and/O Oscar/PERSON Schmidt/PERSON -LRB-/O Brazil/LOCATION -RRB-/O have/O competed/O in/O more/O ./O 
+LeBron/PERSON James/PERSON wo/O n’t/O commit/O to/O play/O for/O Team/LOCATION USA/LOCATION at/O Rio/LOCATION Olympics/LOCATION
+LeBron/PERSON James/PERSON is/O in/O Las/LOCATION Vegas/LOCATION for/O a/O Team/O USA/O minicamp/O , but/O that/O does/O n’t/O necessarily/O mean/O he/O ’ s/O a/O lock/O for/O Rio/PERSON next/O year/O . 
+As/O noted/O by/O Kurt/PERSON Helin/PERSON of/O NBC/ORGANIZATION Sports/ORGANIZATION , the/O 30-year-old/O James/PERSON has/O played/O in/O five/O straight/O NBA/O Finals/O and/O already/O is/O ninth/O on/O the/O NBA/ORGANIZATION ’ s/O all-time/O minutes/O list/O if/O you/O count/O the/O regular/O season/O , playoffs/O and/O international/O play/O . 
+He/O ’ll/O probably/O move/O up/O to/O seventh/O on/O that/O list/O after/O next/O year/O . 
+Should/O he/O decide/O to/O suit/O up/O , it/O would/O be/O James/PERSON ’ s/O fourth/O appearance/O for/O Team/LOCATION USA/LOCATION . 
+Only/O Teofilio/PERSON Cruz/PERSON ( Puerto/LOCATION Rico/LOCATION ) , Andrew/PERSON Gaze/PERSON ( Australia/LOCATION ) and/O Oscar/PERSON Schmidt/PERSON ( Brazil/LOCATION ) have/O competed/O in/O more/O . 
