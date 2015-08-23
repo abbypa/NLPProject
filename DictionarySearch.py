@@ -18,6 +18,8 @@ class DictionarySearch:
         norm = DICTIONARY_NORMAL_WORD_GRADE
         if len(term.split(" "))>1:
             return [0,0,0,0]  #dictionary has single words only, no point checking..
+        elif term.isnumeric() or term[0].isdigit():
+            return [0,0,0,norm]
         elif term.lower() in self.dictionary.keys():
             if self.dictionary[term.lower()][0].isupper():
                 return [ne,ne,ne,0] # might be a NE
