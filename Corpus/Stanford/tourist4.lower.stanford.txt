@@ -1,6 +1,6 @@
-our/O national/O monuments/O are/O truly/O spectacular/O and/O ì must/O see/O î attractions/O when/O visiting/O the/O nation/O í s/O capital/O . 
-among/O the/O most/O popular/O are/O the/O washington/O monument/O , the/O lincoln/O memorial/O , the/O jefferson/O memorial/O and/O vietnam/O memorial/O and/O the/O world/O war/O ii/O memorial/O . 
-see/O a/O guide/O to/O the/O best/O sightseeing/O tours/O in/O washington/O dc/O . 
-the/O memorials/O are/O beautiful/O at/O night/O when/O they/O are/O illuminated/O . 
-many/O of/O them/O are/O open/O 24/O hours/O and/O offer/O great/O views/O of/O the/O city/O . 
-arlington/O national/O cemetery/O , located/O just/O across/O the/O potomac/LOCATION river/LOCATION , is/O also/O a/O prime/O place/O to/O visit/O and/O home/O to/O dozens/O of/O memorials/O including/O the/O coast/O guard/O memorial/O , the/O space/O shuttle/O challenger/O memorial/O , spanish-american/O war/O memorial/O , and/O more/O . 
+our/O national/O monuments/O are/O truly/O spectacular/O and/O ‚Äú must/O see/O ‚Äù attractions/O when/O visiting/O the/O nation/O ‚Äô s/O capital/O .
+among/O the/O most/O popular/O are/O the/O washington/O monument/O , the/O lincoln/O memorial/O , the/O jefferson/O memorial/O and/O vietnam/O memorial/O and/O the/O world/O war/O ii/O memorial/O .
+see/O a/O guide/O to/O the/O best/O sightseeing/O tours/O in/O washington/O dc/O .
+the/O memorials/O are/O beautiful/O at/O night/O when/O they/O are/O illuminated/O .
+many/O of/O them/O are/O open/O 24/O hours/O and/O offer/O great/O views/O of/O the/O city/O .
+arlington/O national/O cemetery/O , located/O just/O across/O the/O potomac/LOCATION river/LOCATION , is/O also/O a/O prime/O place/O to/O visit/O and/O home/O to/O dozens/O of/O memorials/O including/O the/O coast/O guard/O memorial/O , the/O space/O shuttle/O challenger/O memorial/O , spanish/O - american/O war/O memorial/O , and/O more/O .

@@ -13,7 +13,7 @@ class FacebookSearch:
 
     def __init__(self):
         ##https://developers.facebook.com/tools/explorer/
-        user_token = "CAACEdEose0cBAB6754uEoFTGaZBJrW0RNi0gFtwfTZCZCC0sih9qeWF9eU6yviTGRwUol6Cyf7kytLmSRIjL3p6ZCk44h9gB0VfRS5NmOlnnqCrrvJWTqJuhA8ZCyxxdkjYjZBYqHorSZA6nkqfybpKRsG0ptfDDDBunspLSnhcqxw2s2i2izRVfXS9wn7b5UK9LaCUFdfUBunBxRjKYBOq"
+        user_token = "CAACEdEose0cBAO9m1ZChz3qqjqcS3HBlerOSd3wteZC7EqQYlcbngZCmQtvhKQmMmE1sORZAzZA07PboTUXgskIcZBFKeA05FpASH2hEoZCW4im9ZCuNLAlgnOHc00YM5tZByxLCZBo33JkGmq4aPFDNil7FnJGCI7dxgJVwd1ZApkurkCB8WGdZBSJTdNc6zFoCUXFHAKZCZC8OAF6RSV0ljZAw9TA"
         extended_access_token = "CAAJvf8esUFMBAAkaasoT3I3Ef8j2NPAbdozdMoA6DRPwO6CDXgWpNx8J5Wd6ZAcNzgQyP6Np0NweZB4Sl2zFrF75AP3VFiwlnlQZCwE0qGsvQ8Qo5ZBFzqf9sCqlvKaGgiBOsgnZB7NJVBb3YAIFhQMAlB4c4BDF36e84h4FDOjaIQX7ZBjlKpaYyxYdULBxYZD"
         self.graph = GraphAPI(user_token)
         self.fb_cache = Cache(FACEBOOK_CACHE,INPUT_LANGUAGE)
