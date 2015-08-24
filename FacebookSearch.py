@@ -15,7 +15,7 @@ class FacebookSearch:
         ##https://developers.facebook.com/tools/explorer/
         user_token = "CAACEdEose0cBAO9m1ZChz3qqjqcS3HBlerOSd3wteZC7EqQYlcbngZCmQtvhKQmMmE1sORZAzZA07PboTUXgskIcZBFKeA05FpASH2hEoZCW4im9ZCuNLAlgnOHc00YM5tZByxLCZBo33JkGmq4aPFDNil7FnJGCI7dxgJVwd1ZApkurkCB8WGdZBSJTdNc6zFoCUXFHAKZCZC8OAF6RSV0ljZAw9TA"
         extended_access_token = "CAAJvf8esUFMBAAkaasoT3I3Ef8j2NPAbdozdMoA6DRPwO6CDXgWpNx8J5Wd6ZAcNzgQyP6Np0NweZB4Sl2zFrF75AP3VFiwlnlQZCwE0qGsvQ8Qo5ZBFzqf9sCqlvKaGgiBOsgnZB7NJVBb3YAIFhQMAlB4c4BDF36e84h4FDOjaIQX7ZBjlKpaYyxYdULBxYZD"
-        self.graph = GraphAPI(user_token)
+        self.graph = GraphAPI(extended_access_token)
         self.fb_cache = Cache(FACEBOOK_CACHE,INPUT_LANGUAGE)
         self.fb_cache.load()
         self.sleep_count = 0
@@ -37,10 +37,7 @@ class FacebookSearch:
                 cnt = self.search_place(term, cnt)
             except Exception,e:
                 cnt = [-1, -1, -1, -1]
-                print term
-                print e
             self.fb_cache.update_cache_from_list(term,cnt)
-            self.shutdown() ################################### DELETE!!!!
         else:
             m = cache_result.Matches
             cnt = [m["person"],m["company"],m["place"],m["regular"]]
@@ -69,7 +66,7 @@ class FacebookSearch:
                     cnt[1] += self.check_name(i, term, FACEBOOK_PAGE_PRECISE_MUL)
             except:
                 #print "\n" + term
-                print i
+                pass
         return cnt
 
     def search_place(self, term, cnt):

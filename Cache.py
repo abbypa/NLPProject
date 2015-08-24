@@ -21,7 +21,7 @@ class Cache:
                         matches[categories[i]] = float(tmp[i+1])
                     self.cache[tmp[0]] = ClassificationResult(tmp[0], matches)
                 except Exception, e:  # cache corrupted- continue without
-                    print e
+                    pass
             cache_file.close()
 
 

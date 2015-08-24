@@ -21,8 +21,6 @@ class DuckDuckGoWordOccurrenceClassifier:
         try:
             search_result = self.duckduckgo_search.general_search(term)
         except Exception, e:
-            print term
-            print e
             return ClassificationResult(term, {key: -1 for key in categories})
 
         result = self.word_occurrence_classifier.calculate_score(term, search_result)
@@ -69,8 +67,6 @@ class CompanyDuckDuckClassifier:
                 if self.duckduckgo_search.general_search(term_to_search) != '':
                     result.Matches['company'] += 1
             except Exception, e:
-                print term
-                print e
                 return ClassificationResult(term, {key: -1 for key in categories})
         self.cache.update_cache(term, result)
         return self.normalize_results(result)
