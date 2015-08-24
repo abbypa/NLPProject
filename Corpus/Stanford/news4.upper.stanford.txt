@@ -1,0 +1,6 @@
+Lebron/PERSON James/PERSON Won/O ' t/O Commit/O To/O Play/O For/O Team/O Usa/O At/O Rio/LOCATION Olympics/LOCATION
+Lebron/LOCATION James/LOCATION Is/O In/O Las/LOCATION Vegas/LOCATION For/O A/O Team/O Usa/O Minicamp/O , But/O That/O Does/O n’t/O Necessarily/O Mean/O He/O ’ s/O A/O Lock/O For/O Rio/O Next/O Year/O .
+As/O Noted/O By/O Kurt/PERSON Helin/PERSON Of/O Nbc/O Sports/O , The/O 30/O - year/O - old/O James/ORGANIZATION Has/ORGANIZATION Played/ORGANIZATION In/ORGANIZATION Five/ORGANIZATION Straight/ORGANIZATION Nba/ORGANIZATION Finals/O And/O Already/O Is/O Ninth/O On/O The/O Nba/ORGANIZATION ’ s/O All/O - time/O Minutes/O List/O If/O You/O Count/O The/O Regular/O Season/O , Playoffs/O And/O International/O Play/O .
+He/O ’ll/O Probably/O Move/O Up/O To/O Seventh/O On/O That/O List/O After/O Next/O Year/O .
+Should/O He/O Decide/O To/O Suit/O Up/O , It/O Would/O Be/O James/PERSON ’s/O Fourth/ORGANIZATION Appearance/ORGANIZATION For/ORGANIZATION Team/ORGANIZATION Usa/ORGANIZATION .
+Only/O Teofilio/PERSON Cruz/PERSON ( Puerto/LOCATION Rico/LOCATION ) , Andrew/PERSON Gaze/PERSON ( Australia/LOCATION ) And/O Oscar/PERSON Schmidt/PERSON ( Brazil/LOCATION ) Have/O Competed/O In/O More/O .
