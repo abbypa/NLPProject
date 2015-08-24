@@ -1,17 +1,12 @@
-- installation script
-
-
 - before submitting
     - decide on facebook access token
-    - remove todo's, prints, extra files
+    - remove extra files
     - check on nova
 
-
-- book:
-    - test- 2 texts each
-        - run result weights on test files
-        - compare to stanford
-        - same experiment with all lower case, and with all upper case (different weights?)
-    - another language?- try in our system, if not- show premise from google
-    - conclusion- scale out options (google, added data...), problems (google, how to identify a normal word)
-		- on 1-gram, celebrity name will match only if one name matches first
+- files to submit-
+    - sources
+    - Execution instructions.txt
+    - installation script
+    - Report.pdf
+    - partners.txt
+    - corpus
