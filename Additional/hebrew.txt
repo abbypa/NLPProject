@@ -1,0 +1,92 @@
+Duckduck & Facebook
+FACEBOOK_NE_MIN_COUNT = 7
+WORD_OCCURRENCE_MIN_HITS_TO_MATCH = dict([('person', 0), ('company', 0), ('place', 0)])
+
+ירושלים
+Duckduck- {'person': 0, 'company': 0, 'regular': 0, 'place': 19}
+Facebook- {'person': 11, 'company': 17, 'regular': 0, 'place': 54}
+TOTAL- {'person': 11, 'company': 17, 'regular': 0, 'place': 73}
+
+חיפה: 
+Duckduck- {'person': 1, 'company': 0, 'regular': 0, 'place': 16}
+Facebook- {'person': 12, 'company': 32, 'regular': 0, 'place': 46}
+TOTAL- {'person': 13, 'company': 31, 'regular': 0, 'place': 62}
+
+תל-אביב:
+Duckduck- {'person': 0, 'company': 0, 'regular': 0, 'place': 13}
+Facebook- {'person': 10.9, 'company': 17, 'regular': 0, 'place': 5}
+TOTAL- {'person': 10.9, 'company': 17, 'regular': 0, 'place': 18}
+
+ישראל: 
+Duckduck- {'person': 0, 'company': 0, 'regular': 0, 'place': 12}
+Facebook- {'person': 1, 'company': 29, 'regular': 0, 'place': 85}
+TOTAL- {'person': 1, 'company': 29, 'regular': 0, 'place': 97}
+
+הרצליה: 
+Duckduck- {'person': 0, 'company': 1, 'regular': 0, 'place': 9}
+Facebook- {'person': 14, 'company': 20, 'regular': 0, 'place': 1}
+TOTAL- {'person': 14, 'company': 22, 'regular': 0, 'place': 10}
+
+נתניהו: 
+Duckduck- {'person': 2, 'company': 0, 'regular': 0, 'place': 2}
+Facebook- {'person': 14, 'company': 1, 'regular': 0, 'place': 0}
+TOTAL- {'person': 16, 'company': 1, 'regular': 0, 'place': 2}
+
+זאב: 
+Duckduck- {'person': 0, 'company': 0, 'regular': 0, 'place': 0}
+Facebook- {'person': 13, 'company': 11, 'regular': 0, 'place': 10}
+TOTAL- {'person': 13, 'company': 11, 'regular': 0, 'place': 10}
+
+מיכאל: 
+Duckduck- {'person': 1, 'company': 0, 'regular': 0, 'place': 0}
+Facebook- {'person': 3, 'company': 11, 'regular': 0, 'place': 2}
+TOTAL- {'person': 4, 'company': 11, 'regular': 0, 'place': 2}
+
+אל-על: 
+Duckduck- {'person': 0, 'company': 5, 'regular': 0, 'place': 1}
+Facebook- {'person': 0, 'company': 10, 'regular': 0, 'place': 0}
+TOTAL- {'person': 0, 'company': 15, 'regular': 0, 'place': 1}
+
+ארומה: 
+Duckduck- {'person': 0, 'company': 5, 'regular': 0, 'place': 9}
+Facebook- {'person': 3, 'company': 43, 'regular': 0, 'place': 2}
+TOTAL- {'person': 3, 'company': 48, 'regular': 0, 'place': 11}
+
+מכבי חיפה:
+Facebook- {'person': 19.3, 'company': 52, 'regular': 0, 'place': 0}
+Duckduck- {'person': 0, 'company': 0, 'regular': 0, 'place': 0}
+TOTAL- {'person': 18.3, 'company': 51, 'regular': 0, 'place': 0}
+
+הליכוד:
+Facebook- {'person': 0, 'company': 8, 'regular': 0, 'place': 0}
+Duckduck- {'person': 0, 'company': 0, 'regular': 0, 'place': 0}
+TOTAL- {'person': 0, 'company': 8, 'regular': 0, 'place': 0}
+
+יאיר לפיד:
+Facebook- {'person': 50.0, 'company': 0, 'regular': 0, 'place': 0}
+Duckduck- {'person': 0, 'company': 0, 'regular': 0, 'place': 0}
+TOTAL- {'person': 50.0, 'company': 0, 'regular': 0, 'place': 0}
+
+טוש:
+Facebook- {'person': 4, 'company': 2, 'regular': 0, 'place': 0}
+Duckduck- {'person': 0, 'company': 0, 'regular': 0, 'place': 0}
+TOTAL- {'person': 4, 'company': 2, 'regular': 0, 'place': 0}
+
+כסא:
+Facebook- {'person': 1, 'company': 1, 'regular': 0, 'place': 0}
+Duckduck- {'person': 0, 'company': 0, 'regular': 0, 'place': 0}
+TOTAL- {'person': 1, 'company': 1, 'regular': 0, 'place': 0}
+
+קודם:
+Facebook- {'person': 0, 'company': 3, 'regular': 0, 'place': 0}
+Duckduck- {'person': 0, 'company': 0, 'regular': 0, 'place': 0}
+TOTAL- {'person': 0, 'company': 3, 'regular': 0, 'place': 0}
+
+
+
+
+
+
+
+
+
