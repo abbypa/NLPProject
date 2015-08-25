@@ -3,7 +3,7 @@ from Tokenz import char_encode, punctuation_for_printing
 import sys
 
 def __main__(argv):
-    corpus = r".\Corpus\Tagged\all.txt"
+    corpus = r".\Corpus\Tagged\Entertainment1.txt"
     lang = "en"
     inputf = codecs.open(corpus + "_parsed_result", "r", encoding=char_encode[lang])
     expected = codecs.open(corpus + "_expected", "r", encoding=char_encode[lang])
